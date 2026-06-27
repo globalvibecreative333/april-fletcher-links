@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Custom AI Task Walkthrough — Creative Equity Hub</title>
+  <meta name="description" content="Send me one business task you keep avoiding. I'll record a custom screen-share video showing you how to use ChatGPT to complete it — then give you the prompts and instructions so you can repeat the process. $300, no live call required." />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZRNC6GJ8EL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-ZRNC6GJ8EL');
+  </script>
+
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '610416309164215');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=610416309164215&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================================
+       SHARED CEH BRAND SYSTEM
+       (mirrors career-story-map-landing/index.html)
+       ============================================================ */
+    :root {
+      --paper: #ece4d2;
+      --paper-light: #f3ecda;
+      --paper-dark: #ddd2bb;
+      --ink: #1c1a17;
+      --ink-soft: #3a352e;
+      --muted: #8c8576;
+      --rule: #c8bea4;
+      --accent: #c8421f;
+      --accent-deep: #a4341a;
+      --accent-soft: #e8b8a5;
+      --grain: url("data:image/svg+xml;utf8,<svg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.1 0 0 0 0 0.08 0 0 0 0.32 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+
+      --display: "Fraunces", "Times New Roman", serif;
+      --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+
+      --max: 1280px;
+      --gutter: clamp(1.25rem, 4vw, 3rem);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 1.55;
+      font-variation-settings: "opsz" 14, "SOFT" 50, "WONK" 0;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: var(--grain);
+      background-size: 240px 240px;
+      opacity: 0.45;
+      pointer-events: none;
+      mix-blend-mode: multiply;
+      z-index: 100;
+    }
+
+    ::selection { background: var(--accent); color: var(--paper-light); }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+      position: relative;
+    }
+
+    /* ---------- topbar ---------- */
+    .topbar {
+      position: relative;
+      z-index: 5;
+      padding: 1.75rem 0 0;
+      border-bottom: 1px solid transparent;
+    }
+    .topbar-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+    }
+    .mark {
+      font-family: var(--display);
+      font-weight: 500;
+      font-style: italic;
+      font-size: 1.25rem;
+      letter-spacing: -0.01em;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.4rem;
+    }
+    .mark::before {
+      content: "❋";
+      color: var(--accent);
+      font-style: normal;
+      font-size: 0.9rem;
+      transform: translateY(-2px);
+    }
+    .meta {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      display: flex;
+      gap: 1.25rem;
+    }
+    .meta .dot { color: var(--accent); }
+    @media (max-width: 640px) {
+      .meta span:not(.label) { display: none; }
+    }
+
+    /* ---------- hero base ---------- */
+    .hero {
+      position: relative;
+      padding: 4.5rem 0 6rem;
+      min-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.1s ease-out forwards;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 36px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .headline {
+      font-family: var(--display);
+      font-weight: 350;
+      font-size: clamp(3rem, 8.5vw, 8.4rem);
+      line-height: 0.92;
+      letter-spacing: -0.035em;
+      margin: 0;
+      font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 0;
+    }
+    .headline .line {
+      display: block;
+      opacity: 0;
+      animation: fadeUp 1s ease-out forwards;
+    }
+    .headline .line:nth-child(1) { animation-delay: 0.25s; }
+    .headline .line:nth-child(2) { animation-delay: 0.4s; }
+    .headline .line:nth-child(3) { animation-delay: 0.55s; }
+
+    .word-nonlinear {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 400;
+      font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 0;
+    }
+
+    /* ---------- keyframes ---------- */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---------- reduced motion ---------- */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .eyebrow, .headline .line { opacity: 1; }
+      .word-nonlinear span { transform: none; }
+    }
+
+    /* ============================================================
+       PAGE-SPECIFIC SECTION STYLES
+       (added per task below)
+       ============================================================ */
+
+    /* ---------- hero CTA + subhead ---------- */
+    .hero-after {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 6vw, 6rem);
+      margin-top: clamp(2.5rem, 6vw, 4.5rem);
+      align-items: end;
+    }
+    @media (max-width: 780px) {
+      .hero-after { grid-template-columns: 1fr; gap: 2.25rem; }
+    }
+    .sub {
+      font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+      line-height: 1.5;
+      color: var(--ink-soft);
+      margin: 0;
+      max-width: 36ch;
+      opacity: 0;
+      animation: fadeUp 1s 0.75s ease-out forwards;
+    }
+    .cta-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      align-items: flex-start;
+      opacity: 0;
+      animation: fadeUp 1s 0.95s ease-out forwards;
+    }
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 1.05rem 1.6rem;
+      background: var(--ink);
+      color: var(--paper-light);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      transition: background 0.25s ease, transform 0.25s ease;
+      will-change: transform;
+    }
+    .cta:hover { background: var(--accent-deep); transform: translateY(-2px); }
+    .cta:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    .cta-arrow {
+      display: inline-grid;
+      place-items: center;
+      width: 1.1rem;
+      height: 1.1rem;
+      background: var(--accent);
+      border-radius: 50%;
+      color: var(--paper-light);
+      font-style: normal;
+      font-size: 0.7rem;
+      transition: transform 0.3s cubic-bezier(.2,.9,.3,1.4), background 0.25s ease;
+    }
+    .cta:hover .cta-arrow { transform: rotate(-45deg); background: var(--paper-light); color: var(--ink); }
+    .cta-micro {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* ---------- generic section ---------- */
+    .section {
+      padding: clamp(4rem, 8vw, 7rem) 0;
+      border-top: 1px solid var(--rule);
+      position: relative;
+    }
+    .section-head {
+      margin-bottom: clamp(2rem, 4vw, 3rem);
+    }
+    .section-head-wide {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .section-tag {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .section-tag::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: var(--accent);
+    }
+    .section-lede {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--ink-soft);
+      margin: 0;
+      font-variation-settings: "opsz" 24, "SOFT" 80, "WONK" 0;
+    }
+
+    /* ---------- 01 What this is ---------- */
+    .section-what .section-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 6vw, 5rem);
+      align-items: start;
+    }
+    @media (max-width: 780px) {
+      .section-what .section-body { grid-template-columns: 1fr; gap: 2.25rem; }
+    }
+    .prose {
+      font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+      line-height: 1.55;
+      color: var(--ink-soft);
+      margin: 0;
+      max-width: 38ch;
+    }
+    .pull {
+      font-family: var(--display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(1.5rem, 2.8vw, 2.4rem);
+      line-height: 1.25;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+      margin: 0;
+      padding-left: 1.5rem;
+      border-left: 2px solid var(--accent);
+      font-variation-settings: "opsz" 80, "SOFT" 100, "WONK" 0;
+    }
+
+    /* ---------- 02 task grid ---------- */
+    .task-grid {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--rule);
+      border-left: 1px solid var(--rule);
+    }
+    @media (max-width: 980px) { .task-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .task-grid { grid-template-columns: 1fr; } }
+    .task-card {
+      padding: 1.85rem 1.6rem 1.85rem;
+      border-right: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      background: transparent;
+      position: relative;
+      transition: background 0.25s ease;
+      cursor: pointer;
+      user-select: none;
+    }
+    .task-card:hover { background: var(--paper-light); }
+    .task-card:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: -2px;
+    }
+    .task-card::after {
+      content: "✓ Copied";
+      position: absolute;
+      top: 1.85rem;
+      right: 1.6rem;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      color: var(--accent);
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(-3px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      pointer-events: none;
+    }
+    .task-card.is-copied { background: var(--paper-light); }
+    .task-card.is-copied::after {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .task-num {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 0.7rem;
+    }
+    .task-card h3 {
+      font-family: var(--display);
+      font-weight: 500;
+      font-size: 1.25rem;
+      line-height: 1.2;
+      margin: 0 0 0.55rem;
+      letter-spacing: -0.01em;
+      font-variation-settings: "opsz" 36, "SOFT" 60, "WONK" 0;
+    }
+    .task-card p {
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--ink-soft);
+    }
+
+    /* ---------- 03 deliverables ---------- */
+    .deliverables {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: clamp(1.75rem, 3vw, 2.5rem);
+    }
+    @media (max-width: 980px) { .deliverables { grid-template-columns: repeat(2, 1fr); gap: 2.25rem; } }
+    @media (max-width: 600px) { .deliverables { grid-template-columns: 1fr; } }
+    .deliverable { display: flex; flex-direction: column; gap: 0.85rem; }
+    .del-num {
+      font-family: var(--display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 2.6rem;
+      line-height: 1;
+      color: var(--accent);
+      font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    }
+    .deliverable h3 {
+      font-family: var(--display);
+      font-weight: 500;
+      font-size: 1.2rem;
+      margin: 0;
+      letter-spacing: -0.005em;
+      line-height: 1.25;
+      font-variation-settings: "opsz" 36, "SOFT" 60, "WONK" 0;
+    }
+    .deliverable p {
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.55;
+      color: var(--ink-soft);
+    }
+
+    /* ---------- 04 how it works ---------- */
+    .steps {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .step {
+      display: grid;
+      grid-template-columns: minmax(80px, 14%) 1fr;
+      gap: clamp(1.25rem, 3vw, 3rem);
+      align-items: baseline;
+      padding: 1.9rem 0;
+      border-top: 1px solid var(--rule);
+    }
+    .step:last-child { border-bottom: 1px solid var(--rule); }
+    .step-num {
+      font-family: var(--mono);
+      font-size: clamp(1.5rem, 3vw, 2.4rem);
+      letter-spacing: 0.04em;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .step h3 {
+      font-family: var(--display);
+      font-weight: 500;
+      font-size: clamp(1.3rem, 2.2vw, 1.75rem);
+      margin: 0 0 0.45rem;
+      letter-spacing: -0.01em;
+      font-variation-settings: "opsz" 60, "SOFT" 60, "WONK" 0;
+    }
+    .step p {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.55;
+      color: var(--ink-soft);
+      max-width: 56ch;
+    }
+
+    /* ---------- 05 scope ---------- */
+    .scope-intro {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: clamp(1.25rem, 2vw, 1.55rem);
+      line-height: 1.4;
+      color: var(--ink);
+      margin: 0 0 1.5rem;
+      max-width: 32ch;
+      font-variation-settings: "opsz" 48, "SOFT" 80, "WONK" 0;
+    }
+    .scope-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 5vw, 4rem);
+      align-items: start;
+    }
+    @media (max-width: 780px) { .scope-body { grid-template-columns: 1fr; gap: 2rem; } }
+    .scope-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+    .scope-list li {
+      font-family: var(--mono);
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+      color: var(--ink-soft);
+      padding-left: 1.5rem;
+      position: relative;
+    }
+    .scope-list li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+    .boundary {
+      font-family: var(--display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(1.05rem, 1.55vw, 1.25rem);
+      line-height: 1.5;
+      color: var(--ink-soft);
+      margin: 0;
+      padding: 0.4rem 0 0.4rem 1.25rem;
+      border-left: 2px solid var(--accent);
+      max-width: 42ch;
+      font-variation-settings: "opsz" 32, "SOFT" 80, "WONK" 0;
+    }
+
+    /* ---------- 06 price ---------- */
+    .price-row {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: clamp(2rem, 6vw, 5rem);
+      align-items: center;
+    }
+    @media (max-width: 780px) { .price-row { grid-template-columns: 1fr; gap: 1.5rem; } }
+    .price-numeral {
+      font-family: var(--display);
+      font-weight: 350;
+      font-size: clamp(5rem, 14vw, 12rem);
+      line-height: 0.9;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+      font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 0;
+    }
+    .price-line {
+      font-family: var(--display);
+      font-size: clamp(1.1rem, 1.7vw, 1.4rem);
+      line-height: 1.45;
+      color: var(--ink-soft);
+      margin: 0;
+      max-width: 28ch;
+    }
+
+    /* ---------- final CTA ---------- */
+    .section-final-cta { border-top: 1px solid var(--rule); }
+    .final-cta-card {
+      padding: clamp(3rem, 6vw, 5rem) clamp(1.75rem, 4vw, 3.5rem);
+      background: var(--paper-light);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+    .final-cta-title {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: clamp(2rem, 5vw, 3.75rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin: 0;
+      max-width: 18ch;
+      font-variation-settings: "opsz" 96, "SOFT" 50, "WONK" 0;
+    }
+    .cta-large { padding: 1.2rem 1.9rem; font-size: 0.82rem; }
+    .final-cta-boundary {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      line-height: 1.6;
+      color: var(--ink-soft);
+      text-transform: none;
+      margin: 0;
+      max-width: 56ch;
+    }
+
+    /* ---------- footer ---------- */
+    .footer {
+      border-top: 1px solid var(--rule);
+      padding: 2.25rem 0 3rem;
+      margin-top: clamp(2rem, 4vw, 4rem);
+    }
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-row">
+      <a href="#" class="mark">Creative Equity Hub</a>
+      <div class="meta">
+        <span>Bridge Offer</span>
+        <span class="dot">●</span>
+        <span>$300</span>
+        <span class="dot">●</span>
+        <span class="label">No Live Call</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="eyebrow">Custom AI Task Walkthrough</div>
+        <h1 class="headline">
+          <span class="line">One business task.</span>
+          <span class="line">One custom AI walkthrough.</span>
+          <span class="line"><span class="word-nonlinear">No live call required.</span></span>
+        </h1>
+        <div class="hero-after">
+          <p class="sub">You know there's probably a way to do this faster with ChatGPT — you just don't want to figure it out from scratch. Send me the task. I record a custom screen-share, then hand you the prompts and simple instructions so you can repeat the process.</p>
+          <div class="cta-block">
+            <a href="mailto:creativeequityhub@gmail.com?subject=Custom%20AI%20Task%20Walkthrough%20%E2%80%94%20task%20submission&body=Hi%20April%2C%0A%0AHere%27s%20the%20task%20I%27d%20like%20a%20walkthrough%20for.%0A%0A1.%20What%20business%20task%20do%20you%20want%20help%20with%3F%0A%0A%0A2.%20Where%20is%20the%20current%20version%3F%20%28Paste%20the%20text%20or%20link.%29%0A%0A%0A3.%20Who%20is%20this%20for%3F%0A%0A%0A4.%20What%20do%20you%20want%20the%20finished%20version%20to%20help%20you%20do%3F%0A%0A%0A5.%20What%20tone%20or%20style%20should%20it%20have%3F%0A%0A%0A6.%20Where%20will%20you%20use%20this%20after%20it%20is%20done%3F%0A%0A%0AThanks%2C" class="cta" data-cta="hero">Send your task <span class="cta-arrow">→</span></a>
+            <p class="cta-micro">$300 · Delivered in 3–5 business days</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-what">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-tag">01 — What this is</span>
+        </div>
+        <div class="section-body">
+          <p class="prose">A custom walkthrough for one specific business task — not a class, not coaching, not unlimited AI training. You send the task. I figure out the ChatGPT workflow. You get the video, the prompts and the instructions to do it again on your own.</p>
+          <blockquote class="pull">You don't need to learn AI from scratch. You need one business task finished in a way you can repeat.</blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-tasks">
+      <div class="container">
+        <div class="section-head section-head-wide">
+          <span class="section-tag">02 — Best tasks for this</span>
+          <p class="section-lede">Pick one. Bring the raw material you already have.</p>
+        </div>
+        <ul class="task-grid">
+          <li class="task-card" role="button" tabindex="0"><span class="task-num">01</span><h3>Improve a Craigslist ad</h3><p>Your ad already has the raw material. We turn it into a clearer version you can reuse.</p></li>
+          <li class="task-card" role="button" tabindex="0"><span class="task-num">02</span><h3>Rewrite a service description</h3><p>From vague to specific, so people understand what you do and why to book.</p></li>
+          <li class="task-card" role="button" tabindex="0"><span class="task-num">03</span><h3>Clean up a business bio</h3><p>One short, usable bio you can drop into a profile, pitch or directory.</p></li>
+          <li class="task-card" role="button" tabindex="0"><span class="task-num">04</span><h3>Create a simple FAQ</h3><p>The five questions every customer asks, written so they answer themselves.</p></li>
+          <li class="task-card" role="button" tabindex="0"><span class="task-num">05</span><h3>Draft follow-up messages</h3><p>A short, reusable sequence for leads who go quiet after the first reply.</p></li>
+          <li class="task-card" role="button" tabindex="0"><span class="task-num">06</span><h3>Turn reviews into posts</h3><p>Your existing reviews become marketing copy you can use this week.</p></li>
+          <li class="task-card" role="button" tabindex="0"><span class="task-num">07</span><h3>Create content prompts</h3><p>A week of post ideas built from what you already do, not random topics.</p></li>
+          <li class="task-card" role="button" tabindex="0"><span class="task-num">08</span><h3>Improve a Google Business description</h3><p>Make the description match the actual reason people book you.</p></li>
+          <li class="task-card" role="button" tabindex="0"><span class="task-num">09</span><h3>Turn rough notes into a promo post</h3><p>Bring the messy version. We shape it into something you can publish.</p></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section section-deliverables">
+      <div class="container">
+        <div class="section-head"><span class="section-tag">03 — What you get</span></div>
+        <ul class="deliverables">
+          <li class="deliverable">
+            <span class="del-num">A</span>
+            <h3>Custom screen-share video</h3>
+            <p>15–30 minutes, recorded around your specific task. Rewatch as often as you need.</p>
+          </li>
+          <li class="deliverable">
+            <span class="del-num">B</span>
+            <h3>Prompt sequence</h3>
+            <p>The exact prompts I used, cleaned up so you can copy and reuse them.</p>
+          </li>
+          <li class="deliverable">
+            <span class="del-num">C</span>
+            <h3>Written instruction packet</h3>
+            <p>A short guide explaining what was done, why it matters and how to repeat the process.</p>
+          </li>
+          <li class="deliverable">
+            <span class="del-num">D</span>
+            <h3>Optional sample output</h3>
+            <p>Depending on the task — the improved ad, bio, FAQ, description or content draft generated during the walkthrough.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section section-how">
+      <div class="container">
+        <div class="section-head"><span class="section-tag">04 — How it works</span></div>
+        <ol class="steps">
+          <li class="step">
+            <span class="step-num">01</span>
+            <div>
+              <h3>Send your task</h3>
+              <p>Email me a short description of the task and any current copy or link.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step-num">02</span>
+            <div>
+              <h3>I review the fit</h3>
+              <p>If it's a match, I send a payment link. If it's outside the scope of this offer, I tell you.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step-num">03</span>
+            <div>
+              <h3>I record the walkthrough</h3>
+              <p>Custom screen-share video built around your specific task.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step-num">04</span>
+            <div>
+              <h3>You receive the packet</h3>
+              <p>Video plus prompt sequence plus written instructions, delivered in 3–5 business days.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step-num">05</span>
+            <div>
+              <h3>You reuse the process</h3>
+              <p>Use the prompts and instructions to repeat the same approach on your own.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section section-scope">
+      <div class="container">
+        <div class="section-head"><span class="section-tag">05 — Scope</span></div>
+        <p class="scope-intro">This walkthrough covers one specific business task. It is not:</p>
+        <div class="scope-body">
+          <ul class="scope-list">
+            <li>A full marketing strategy</li>
+            <li>A website rewrite</li>
+            <li>Business coaching</li>
+            <li>Unlimited AI training</li>
+            <li>A done-for-you content package</li>
+            <li>A full automation build</li>
+          </ul>
+          <blockquote class="boundary">I review every task before sending a payment link. Either way, you'll hear back from me within a business day.</blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-price">
+      <div class="container">
+        <div class="section-head"><span class="section-tag">06 — Price</span></div>
+        <div class="price-row">
+          <div class="price-numeral">$300</div>
+          <p class="price-line">One task. One walkthrough.<br/>Delivered in 3–5 business days.<br/>No live call required.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-final-cta">
+      <div class="container">
+        <div class="final-cta-card">
+          <h2 class="final-cta-title">Send the task you keep avoiding.</h2>
+          <a href="mailto:creativeequityhub@gmail.com?subject=Custom%20AI%20Task%20Walkthrough%20%E2%80%94%20task%20submission&body=Hi%20April%2C%0A%0AHere%27s%20the%20task%20I%27d%20like%20a%20walkthrough%20for.%0A%0A1.%20What%20business%20task%20do%20you%20want%20help%20with%3F%0A%0A%0A2.%20Where%20is%20the%20current%20version%3F%20%28Paste%20the%20text%20or%20link.%29%0A%0A%0A3.%20Who%20is%20this%20for%3F%0A%0A%0A4.%20What%20do%20you%20want%20the%20finished%20version%20to%20help%20you%20do%3F%0A%0A%0A5.%20What%20tone%20or%20style%20should%20it%20have%3F%0A%0A%0A6.%20Where%20will%20you%20use%20this%20after%20it%20is%20done%3F%0A%0A%0AThanks%2C" class="cta cta-large" data-cta="final">Send your task <span class="cta-arrow">→</span></a>
+          <p class="final-cta-boundary">All tasks are reviewed before payment. Not every task is a fit — and that's okay.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-row">
+      <a href="#" class="mark">Creative Equity Hub</a>
+      <div class="meta">
+        <span>creativeequityhub@gmail.com</span>
+        <span class="dot">●</span>
+        <span class="label">MMXXVI</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const cards = document.querySelectorAll('.task-card');
+      const fallbackCopy = (text) => {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); } catch (_) {}
+        ta.remove();
+      };
+      cards.forEach((card) => {
+        const title = card.querySelector('h3')?.textContent.trim() || '';
+        card.setAttribute('aria-label', `Copy "${title}" to clipboard`);
+        let timer;
+        const flash = () => {
+          card.classList.add('is-copied');
+          clearTimeout(timer);
+          timer = setTimeout(() => card.classList.remove('is-copied'), 1600);
+        };
+        const copy = async () => {
+          if (!title) return;
+          try {
+            if (navigator.clipboard && window.isSecureContext) {
+              await navigator.clipboard.writeText(title);
+            } else {
+              fallbackCopy(title);
+            }
+          } catch (_) {
+            fallbackCopy(title);
+          }
+          flash();
+        };
+        card.addEventListener('click', copy);
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            copy();
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "career-story-map",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "4321", "--directory", "/Users/aprilfletcher/Desktop/Claude Sandbox/career-story-map-landing"],
+      "port": 4321
+    }
+  ]
+}
