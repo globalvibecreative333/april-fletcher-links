@@ -1,0 +1,102 @@
+<h2>Dashboard Layout</h2>
+<p class="subtitle">How should the AI chat panel relate to your project cards?</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="display:flex;height:160px;gap:6px;padding:10px;background:#0f1117;border-radius:6px;font-size:11px;color:#888;">
+        <div style="flex:1;display:flex;flex-direction:column;gap:6px;">
+          <div style="background:#1a1d27;border-radius:4px;padding:6px;color:#ccc;font-size:10px;">
+            <div style="color:#7c85ff;font-weight:600;margin-bottom:3px;">■ Project Alpha</div>
+            <div style="color:#4ade80;font-size:9px;">● Active · 2 days ago</div>
+          </div>
+          <div style="background:#1a1d27;border-radius:4px;padding:6px;color:#ccc;font-size:10px;">
+            <div style="color:#7c85ff;font-weight:600;margin-bottom:3px;">■ Project Beta</div>
+            <div style="color:#f59e0b;font-size:9px;">● Waiting · 5 days ago</div>
+          </div>
+          <div style="background:#1a1d27;border-radius:4px;padding:6px;color:#ccc;font-size:10px;">
+            <div style="color:#7c85ff;font-weight:600;margin-bottom:3px;">■ Project Gamma</div>
+            <div style="color:#60a5fa;font-size:9px;">● Paused · 1 week ago</div>
+          </div>
+        </div>
+        <div style="width:90px;background:#13151f;border-radius:4px;padding:6px;display:flex;flex-direction:column;gap:4px;">
+          <div style="color:#7c85ff;font-size:9px;font-weight:600;border-bottom:1px solid #2a2d3a;padding-bottom:3px;">AI Assistant</div>
+          <div style="background:#1a1d27;border-radius:3px;padding:4px;color:#aaa;font-size:8px;">What should I focus on today?</div>
+          <div style="background:#2d3060;border-radius:3px;padding:4px;color:#c4caff;font-size:8px;">You haven't touched Beta in 5 days...</div>
+          <div style="margin-top:auto;background:#1a1d27;border-radius:3px;padding:3px 5px;color:#555;font-size:8px;">Ask anything...</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Side-by-side panel</h3>
+      <p>Projects fill the left (wider) column. AI chat lives in a fixed right panel. Both visible at all times. Best if you have ~5–8 projects.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="display:flex;flex-direction:column;height:160px;gap:6px;padding:10px;background:#0f1117;border-radius:6px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;flex:1;">
+          <div style="background:#1a1d27;border-radius:4px;padding:5px;font-size:9px;color:#ccc;">
+            <div style="color:#7c85ff;font-weight:600;margin-bottom:2px;">■ Alpha</div>
+            <div style="color:#4ade80;font-size:8px;">● Active</div>
+            <div style="color:#555;font-size:8px;margin-top:3px;">2d ago</div>
+          </div>
+          <div style="background:#1a1d27;border-radius:4px;padding:5px;font-size:9px;color:#ccc;">
+            <div style="color:#7c85ff;font-weight:600;margin-bottom:2px;">■ Beta</div>
+            <div style="color:#f59e0b;font-size:8px;">● Waiting</div>
+            <div style="color:#555;font-size:8px;margin-top:3px;">5d ago</div>
+          </div>
+          <div style="background:#1a1d27;border-radius:4px;padding:5px;font-size:9px;color:#ccc;">
+            <div style="color:#7c85ff;font-weight:600;margin-bottom:2px;">■ Gamma</div>
+            <div style="color:#60a5fa;font-size:8px;">● Paused</div>
+            <div style="color:#555;font-size:8px;margin-top:3px;">1w ago</div>
+          </div>
+        </div>
+        <div style="background:#13151f;border-radius:4px;padding:5px;display:flex;align-items:center;gap:6px;">
+          <div style="color:#7c85ff;font-size:9px;font-weight:600;white-space:nowrap;">AI Chat</div>
+          <div style="flex:1;background:#1a1d27;border-radius:3px;padding:3px 6px;color:#555;font-size:8px;">Ask about your projects...</div>
+          <div style="color:#7c85ff;font-size:10px;">↑</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Full-width cards + bottom chat bar</h3>
+      <p>Projects spread across the full width in a grid. AI chat is a collapsible strip at the bottom that expands into a panel. More space for cards.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="display:flex;height:160px;gap:6px;padding:10px;background:#0f1117;border-radius:6px;font-size:11px;color:#888;">
+        <div style="width:60px;background:#13151f;border-radius:4px;padding:6px;display:flex;flex-direction:column;gap:6px;">
+          <div style="color:#7c85ff;font-size:8px;font-weight:600;">MC</div>
+          <div style="color:#ccc;font-size:8px;padding:3px;background:#1e2130;border-radius:3px;">Dashboard</div>
+          <div style="color:#888;font-size:8px;padding:3px;">Projects</div>
+          <div style="color:#888;font-size:8px;padding:3px;">AI Chat</div>
+          <div style="margin-top:auto;color:#555;font-size:8px;padding:3px;">Settings</div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;gap:5px;">
+          <div style="background:#1a1d27;border-radius:4px;padding:6px;color:#ccc;font-size:10px;">
+            <div style="color:#7c85ff;font-weight:600;margin-bottom:2px;">■ Project Alpha</div>
+            <div style="display:flex;justify-content:space-between;"><span style="color:#4ade80;font-size:9px;">● Active</span><span style="color:#555;font-size:9px;">2d ago</span></div>
+          </div>
+          <div style="background:#1a1d27;border-radius:4px;padding:6px;color:#ccc;font-size:10px;">
+            <div style="color:#7c85ff;font-weight:600;margin-bottom:2px;">■ Project Beta</div>
+            <div style="display:flex;justify-content:space-between;"><span style="color:#f59e0b;font-size:9px;">● Waiting</span><span style="color:#555;font-size:9px;">5d ago</span></div>
+          </div>
+          <div style="background:#1a1d27;border-radius:4px;padding:6px;color:#ccc;font-size:10px;">
+            <div style="color:#7c85ff;font-weight:600;margin-bottom:2px;">■ Project Gamma</div>
+            <div style="display:flex;justify-content:space-between;"><span style="color:#60a5fa;font-size:9px;">● Paused</span><span style="color:#555;font-size:9px;">1w ago</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Left nav with tabbed sections</h3>
+      <p>Slim left sidebar for navigation. Dashboard, Projects, and AI Chat are separate views. Cleanest separation — better if you plan to add more sections later.</p>
+    </div>
+  </div>
+
+</div>

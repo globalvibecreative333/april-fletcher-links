@@ -1,0 +1,15 @@
+- generic [ref=e10]:
+  - generic [ref=e316]: SECTION 11 OF 13 · KNOWN STORIES, PHOTOS & OBJECTS
+  - heading "Known stories, photos & objects" [level=2] [ref=e317]
+  - paragraph [ref=e318]: Anything passed down — even fragments.
+  - generic [ref=e319]:
+    - generic [ref=e320]: Known stories
+    - textbox [ref=e321]
+  - generic [ref=e322]:
+    - generic [ref=e323]: Photos or objects connected to them
+    - textbox [ref=e324]
+  - generic [ref=e325]:
+    - button "← back" [ref=e326] [cursor=pointer]
+    - generic [ref=e327]:
+      - button "skip" [ref=e328] [cursor=pointer]
+      - button "next →" [ref=e329] [cursor=pointer]

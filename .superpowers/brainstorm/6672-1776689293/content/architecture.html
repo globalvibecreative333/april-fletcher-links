@@ -1,0 +1,78 @@
+<h2>Architecture Overview</h2>
+<p class="subtitle">How the pieces fit together</p>
+
+<div class="section">
+  <h3>Directory Structure</h3>
+  <div style="background:#0f1117;border-radius:8px;padding:16px;font-family:monospace;font-size:12px;line-height:1.8;color:#aaa;">
+    <div><span style="color:#7c85ff;">app/</span></div>
+    <div style="padding-left:16px;"><span style="color:#4ade80;">layout.tsx</span> <span style="color:#444;">— root layout with left nav</span></div>
+    <div style="padding-left:16px;"><span style="color:#4ade80;">page.tsx</span> <span style="color:#444;">— dashboard (redirects to /dashboard)</span></div>
+    <div style="padding-left:16px;"><span style="color:#7c85ff;">dashboard/</span></div>
+    <div style="padding-left:32px;"><span style="color:#4ade80;">page.tsx</span> <span style="color:#444;">— project cards list (Server Component)</span></div>
+    <div style="padding-left:16px;"><span style="color:#7c85ff;">chat/</span></div>
+    <div style="padding-left:32px;"><span style="color:#4ade80;">page.tsx</span> <span style="color:#444;">— AI chat panel (Client Component)</span></div>
+    <div style="padding-left:16px;"><span style="color:#7c85ff;">api/chat/</span></div>
+    <div style="padding-left:32px;"><span style="color:#4ade80;">route.ts</span> <span style="color:#444;">— streams Anthropic response</span></div>
+    <div><span style="color:#7c85ff;">components/</span></div>
+    <div style="padding-left:16px;"><span style="color:#4ade80;">NavSidebar.tsx</span> <span style="color:#444;">— left nav (Client, for active link state)</span></div>
+    <div style="padding-left:16px;"><span style="color:#4ade80;">ProjectCard.tsx</span> <span style="color:#444;">— card with open loops accordion</span></div>
+    <div style="padding-left:16px;"><span style="color:#4ade80;">OpenLoopsPanel.tsx</span> <span style="color:#444;">— expandable loops list (Client)</span></div>
+    <div style="padding-left:16px;"><span style="color:#4ade80;">AddLoopForm.tsx</span> <span style="color:#444;">— inline add loop form (Client)</span></div>
+    <div style="padding-left:16px;"><span style="color:#4ade80;">QuickActions.tsx</span> <span style="color:#444;">— mark worked on + add loop buttons (Client)</span></div>
+    <div style="padding-left:16px;"><span style="color:#4ade80;">ChatPanel.tsx</span> <span style="color:#444;">— streaming chat UI (Client)</span></div>
+    <div><span style="color:#7c85ff;">lib/</span></div>
+    <div style="padding-left:16px;"><span style="color:#f59e0b;">supabase.ts</span> <span style="color:#444;">— server + client instances</span></div>
+    <div style="padding-left:16px;"><span style="color:#f59e0b;">actions.ts</span> <span style="color:#444;">— all Server Actions (mutations)</span></div>
+    <div style="padding-left:16px;"><span style="color:#f59e0b;">context.ts</span> <span style="color:#444;">— builds AI system prompt from project data</span></div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Data Flow</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:8px;">
+    <div style="background:#13151f;border-radius:8px;padding:12px;border:1px solid #1e2130;">
+      <div style="color:#7c85ff;font-size:11px;font-weight:600;margin-bottom:8px;">INITIAL LOAD</div>
+      <div style="font-size:11px;color:#888;line-height:1.7;">
+        Browser → Next.js Server<br>
+        <span style="color:#4ade80;">↓</span> Server Component fetches<br>
+        Supabase (projects + loops)<br>
+        <span style="color:#4ade80;">↓</span> Renders HTML with data<br>
+        Hydrates Client Components
+      </div>
+    </div>
+    <div style="background:#13151f;border-radius:8px;padding:12px;border:1px solid #1e2130;">
+      <div style="color:#f59e0b;font-size:11px;font-weight:600;margin-bottom:8px;">MUTATIONS</div>
+      <div style="font-size:11px;color:#888;line-height:1.7;">
+        User clicks action<br>
+        <span style="color:#f59e0b;">↓</span> Client optimistic update<br>
+        Server Action called<br>
+        <span style="color:#f59e0b;">↓</span> Supabase write<br>
+        revalidatePath() refreshes
+      </div>
+    </div>
+    <div style="background:#13151f;border-radius:8px;padding:12px;border:1px solid #1e2130;">
+      <div style="color:#60a5fa;font-size:11px;font-weight:600;margin-bottom:8px;">AI CHAT</div>
+      <div style="font-size:11px;color:#888;line-height:1.7;">
+        User sends message<br>
+        <span style="color:#60a5fa;">↓</span> POST /api/chat<br>
+        Fetch all projects + loops<br>
+        <span style="color:#60a5fa;">↓</span> Stream from Anthropic<br>
+        ReadableStream → UI
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Key Boundaries</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;">
+    <div style="background:#0f1117;border-radius:6px;padding:10px;border-left:3px solid #4ade80;">
+      <div style="color:#4ade80;font-size:10px;font-weight:600;margin-bottom:4px;">SERVER COMPONENTS</div>
+      <div style="font-size:11px;color:#888;">dashboard/page.tsx reads Supabase directly — no API route needed for reads</div>
+    </div>
+    <div style="background:#0f1117;border-radius:6px;padding:10px;border-left:3px solid #f59e0b;">
+      <div style="color:#f59e0b;font-size:10px;font-weight:600;margin-bottom:4px;">CLIENT COMPONENTS</div>
+      <div style="font-size:11px;color:#888;">Any component with onClick, useState, or useEffect — open loops, quick actions, chat</div>
+    </div>
+  </div>
+</div>

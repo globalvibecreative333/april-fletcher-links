@@ -1,0 +1,1 @@
+- generic [ref=e2]: ALL PASS (4 passed, 0 failed) PASS buildProfile is defined PASS newState() returns object PASS save/load round-trips a field PASS clearState wipes storage

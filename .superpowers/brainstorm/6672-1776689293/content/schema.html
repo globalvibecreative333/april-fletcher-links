@@ -1,0 +1,67 @@
+<h2>Database Schema</h2>
+<p class="subtitle">Four tables in Supabase</p>
+
+<div class="section">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+
+    <div style="background:#15100B;border:1px solid #F57C0F;border-radius:10px;padding:16px;">
+      <div style="color:#F57C0F;font-size:12px;font-weight:700;letter-spacing:1px;margin-bottom:10px;">PROJECTS</div>
+      <div style="font-family:monospace;font-size:11px;color:#C8B8A0;line-height:1.9;">
+        <div><span style="color:#F57C0F;">id</span> uuid pk</div>
+        <div><span style="color:#F57C0F;">name</span> text</div>
+        <div><span style="color:#F57C0F;">category</span> text <span style="color:#8A7868;">// enum in app</span></div>
+        <div><span style="color:#F57C0F;">status</span> text <span style="color:#8A7868;">// active|paused|waiting|done</span></div>
+        <div><span style="color:#F57C0F;">last_worked_on</span> date</div>
+        <div><span style="color:#F57C0F;">notes</span> text</div>
+        <div><span style="color:#F57C0F;">created_at</span> timestamptz</div>
+      </div>
+    </div>
+
+    <div style="background:#15100B;border:1px solid #F57C0F;border-radius:10px;padding:16px;">
+      <div style="color:#F57C0F;font-size:12px;font-weight:700;letter-spacing:1px;margin-bottom:10px;">OPEN_LOOPS</div>
+      <div style="font-family:monospace;font-size:11px;color:#C8B8A0;line-height:1.9;">
+        <div><span style="color:#F57C0F;">id</span> uuid pk</div>
+        <div><span style="color:#F57C0F;">project_id</span> uuid → projects.id</div>
+        <div><span style="color:#F57C0F;">type</span> text <span style="color:#8A7868;">// follow-up|blocker</span></div>
+        <div><span style="color:#F57C0F;">description</span> text</div>
+        <div><span style="color:#F57C0F;">resolved</span> bool (default false)</div>
+        <div><span style="color:#F57C0F;">due_date</span> date nullable</div>
+        <div><span style="color:#F57C0F;">created_at</span> timestamptz</div>
+      </div>
+    </div>
+
+    <div style="background:#15100B;border:1px solid #5A2E0A;border-radius:10px;padding:16px;">
+      <div style="color:#F57C0F;font-size:12px;font-weight:700;letter-spacing:1px;margin-bottom:10px;">CHAT_MESSAGES <span style="color:#7FC088;font-size:9px;">NEW</span></div>
+      <div style="font-family:monospace;font-size:11px;color:#C8B8A0;line-height:1.9;">
+        <div><span style="color:#F57C0F;">id</span> uuid pk</div>
+        <div><span style="color:#F57C0F;">role</span> text <span style="color:#8A7868;">// user|assistant</span></div>
+        <div><span style="color:#F57C0F;">content</span> text</div>
+        <div><span style="color:#F57C0F;">created_at</span> timestamptz</div>
+      </div>
+      <div style="margin-top:10px;padding-top:10px;border-top:1px solid #2A2018;font-size:10px;color:#8A7868;">Trim on app load: DELETE WHERE created_at &lt; now() - interval '6 months'</div>
+    </div>
+
+    <div style="background:#15100B;border:1px solid #5A2E0A;border-radius:10px;padding:16px;">
+      <div style="color:#F57C0F;font-size:12px;font-weight:700;letter-spacing:1px;margin-bottom:10px;">USER_SETTINGS <span style="color:#7FC088;font-size:9px;">NEW</span></div>
+      <div style="font-family:monospace;font-size:11px;color:#C8B8A0;line-height:1.9;">
+        <div><span style="color:#F57C0F;">id</span> int pk (always 1)</div>
+        <div><span style="color:#F57C0F;">idle_amber_days</span> int (default 5)</div>
+        <div><span style="color:#F57C0F;">idle_red_days</span> int (default 7)</div>
+        <div><span style="color:#F57C0F;">theme</span> text (default 'dark')</div>
+        <div><span style="color:#F57C0F;">updated_at</span> timestamptz</div>
+      </div>
+      <div style="margin-top:10px;padding-top:10px;border-top:1px solid #2A2018;font-size:10px;color:#8A7868;">Single row. Seed with defaults on init.</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section" style="margin-top:16px;">
+  <h3 style="color:#F57C0F;">Category enum (app-level, fixed set)</h3>
+  <div style="display:flex;gap:8px;margin-top:8px;">
+    <span style="background:#2A1A0C;color:#F57C0F;border:1px solid #F57C0F;border-radius:12px;padding:4px 12px;font-size:11px;">My Apps</span>
+    <span style="background:#2A1A0C;color:#F57C0F;border:1px solid #F57C0F;border-radius:12px;padding:4px 12px;font-size:11px;">Client Work</span>
+    <span style="background:#2A1A0C;color:#F57C0F;border:1px solid #F57C0F;border-radius:12px;padding:4px 12px;font-size:11px;">Content</span>
+    <span style="background:#2A1A0C;color:#F57C0F;border:1px solid #F57C0F;border-radius:12px;padding:4px 12px;font-size:11px;">Admin</span>
+  </div>
+</div>

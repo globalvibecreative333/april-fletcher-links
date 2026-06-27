@@ -1,0 +1,15 @@
+- generic [ref=e10]:
+  - generic [ref=e80]: SECTION 4 OF 13 · PLACES THAT SHAPED THEIR LIFE
+  - heading "Places that shaped their life" [level=2] [ref=e81]
+  - paragraph [ref=e82]: "One place per line: place — approx years — source — what was happening there."
+  - generic [ref=e83]:
+    - generic [ref=e84]: Places lived
+    - textbox "Detroit, MI — 1918-1931 — 1920 census — auto boom, Great Migration" [ref=e85]
+  - generic [ref=e86]:
+    - generic [ref=e87]: Place questions
+    - textbox "Stayed or moved often? Migration pattern? Near extended family? Why move? Local economy? Churches/schools/factories? Places family still talks about?" [ref=e88]
+  - generic [ref=e89]:
+    - button "← back" [ref=e90] [cursor=pointer]
+    - generic [ref=e91]:
+      - button "skip" [ref=e92] [cursor=pointer]
+      - button "next →" [ref=e93] [cursor=pointer]

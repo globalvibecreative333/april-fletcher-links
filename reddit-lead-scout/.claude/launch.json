@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "reddit-lead-scout",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 3000,
+      "cwd": "/Users/aprilfletcher/Desktop/Claude Sandbox/reddit-lead-scout"
+    }
+  ]
+}

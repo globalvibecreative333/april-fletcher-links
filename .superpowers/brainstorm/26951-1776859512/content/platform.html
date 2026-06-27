@@ -1,0 +1,26 @@
+<h2>Where should this tool live?</h2>
+<p class="subtitle">This shapes everything about how it's built and how fast you can open it mid-session.</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Single HTML file</h3>
+      <p>One self-contained file you open in any browser. No install, no server, no dependencies. Double-click to launch. Works offline.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Local web app (React / Next.js)</h3>
+      <p>Runs with <code>npm run dev</code>. Easier to extend over time, but requires Node.js installed and a terminal step to launch.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Claude-powered (AI evaluates leads)</h3>
+      <p>The Lead Evaluator uses Claude API to score snippets. Requires an API key and internet. Best accuracy, but adds setup and cost.</p>
+    </div>
+  </div>
+</div>

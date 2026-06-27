@@ -1,0 +1,47 @@
+- generic [ref=e10]:
+  - generic [ref=e209]: SECTION 8 OF 13 · WHAT THE RECORDS SAY
+  - heading "What the records say" [level=2] [ref=e210]
+  - paragraph [ref=e211]: List the records you have, and what each one tells you.
+  - generic [ref=e212]:
+    - generic [ref=e213]: Records and sources held
+    - generic [ref=e214]:
+      - checkbox "Census records" [ref=e215]
+      - text: Census records
+    - generic [ref=e216]:
+      - checkbox "Birth/marriage/death records" [ref=e217]
+      - text: Birth/marriage/death records
+    - generic [ref=e218]:
+      - checkbox "Military records" [ref=e219]
+      - text: Military records
+    - generic [ref=e220]:
+      - checkbox "Land or property records" [ref=e221]
+      - text: Land or property records
+    - generic [ref=e222]:
+      - checkbox "Immigration or naturalization records" [ref=e223]
+      - text: Immigration or naturalization records
+    - generic [ref=e224]:
+      - checkbox "Church or cemetery records" [ref=e225]
+      - text: Church or cemetery records
+    - generic [ref=e226]:
+      - checkbox "Newspaper items" [ref=e227]
+      - text: Newspaper items
+    - generic [ref=e228]:
+      - checkbox "Photographs" [ref=e229]
+      - text: Photographs
+    - generic [ref=e230]:
+      - checkbox "Letters, diaries or family documents" [ref=e231]
+      - text: Letters, diaries or family documents
+    - generic [ref=e232]:
+      - checkbox "Oral family stories" [ref=e233]
+      - text: Oral family stories
+    - generic [ref=e234]:
+      - checkbox "Other sources" [ref=e235]
+      - text: Other sources
+  - generic [ref=e236]:
+    - generic [ref=e237]: What each source tells you
+    - 'textbox "Per source: what it says / what it suggests / what it does not answer" [ref=e238]'
+  - generic [ref=e239]:
+    - button "← back" [ref=e240] [cursor=pointer]
+    - generic [ref=e241]:
+      - button "skip" [ref=e242] [cursor=pointer]
+      - button "next →" [ref=e243] [cursor=pointer]

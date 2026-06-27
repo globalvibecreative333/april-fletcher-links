@@ -1,0 +1,30 @@
+- generic [ref=e10]:
+  - generic [ref=e94]: SECTION 5 OF 13 · WORK, ROLE & DAILY LIFE
+  - heading "Work, role & daily life" [level=2] [ref=e95]
+  - paragraph [ref=e96]: This moves the person beyond names and dates.
+  - generic [ref=e97]:
+    - generic [ref=e98]: Known occupation(s)
+    - textbox [ref=e99]
+  - generic [ref=e100]:
+    - generic [ref=e101]: Household role or unpaid labor
+    - textbox [ref=e102]
+  - generic [ref=e103]:
+    - generic [ref=e104]: Farm, business, trade, profession or domestic work
+    - textbox [ref=e105]
+  - generic [ref=e106]:
+    - generic [ref=e107]: Military service, if any
+    - textbox [ref=e108]
+  - generic [ref=e109]:
+    - generic [ref=e110]: Schooling or training, if known
+    - textbox [ref=e111]
+  - generic [ref=e112]:
+    - generic [ref=e113]: Organizations, churches, clubs, lodges or community roles
+    - textbox [ref=e114]
+  - generic [ref=e115]:
+    - generic [ref=e116]: Daily life questions
+    - textbox "What shaped their days? Stable/seasonal/dangerous/skilled/domestic? Owned/rented/boarded? Role in records? What might a regular day have looked like?" [ref=e117]
+  - generic [ref=e118]:
+    - button "← back" [ref=e119] [cursor=pointer]
+    - generic [ref=e120]:
+      - button "skip" [ref=e121] [cursor=pointer]
+      - button "next →" [ref=e122] [cursor=pointer]

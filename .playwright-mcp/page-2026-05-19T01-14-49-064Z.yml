@@ -1,0 +1,33 @@
+- generic [ref=e10]:
+  - generic [ref=e22]: SECTION 2 OF 13 · BASIC RECORD FACTS
+  - heading "Basic record facts" [level=2] [ref=e23]
+  - paragraph [ref=e24]: Fill in what you know. Approximate dates are fine. Mark guesses as guesses.
+  - generic [ref=e25]:
+    - generic [ref=e26]: Full name
+    - textbox "as you know it" [ref=e27]
+  - generic [ref=e28]:
+    - generic [ref=e29]: Other names or spellings
+    - textbox "maiden, nicknames, variants" [ref=e30]
+  - generic [ref=e31]:
+    - generic [ref=e32]: Birth date or approximate year
+    - textbox [ref=e33]
+  - generic [ref=e34]:
+    - generic [ref=e35]: Birthplace
+    - textbox [ref=e36]
+  - generic [ref=e37]:
+    - generic [ref=e38]: Death date or approximate year
+    - textbox [ref=e39]
+  - generic [ref=e40]:
+    - generic [ref=e41]: Place of death
+    - textbox [ref=e42]
+  - generic [ref=e43]:
+    - generic [ref=e44]: Marriage date(s), if known
+    - textbox [ref=e45]
+  - generic [ref=e46]:
+    - generic [ref=e47]: Other important dates
+    - textbox [ref=e48]
+  - generic [ref=e49]:
+    - button "← back" [ref=e50] [cursor=pointer]
+    - generic [ref=e51]:
+      - button "skip" [ref=e52] [cursor=pointer]
+      - button "next →" [ref=e53] [cursor=pointer]

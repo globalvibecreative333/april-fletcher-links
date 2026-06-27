@@ -1,0 +1,12 @@
+- generic [ref=e12]:
+  - generic [ref=e13]: SECTION 1 OF 13 · CHOOSE YOUR PERSON
+  - heading "Choose your person" [level=2] [ref=e14]
+  - paragraph [ref=e15]: Pick one ancestor or relative. Use whatever you have.
+  - generic [ref=e16]:
+    - generic [ref=e17]: Who is this person, and why this person?
+    - textbox "e.g. my great-grandmother; only known through records" [ref=e18]: test reason
+  - generic [ref=e19]:
+    - button "← welcome" [ref=e20] [cursor=pointer]
+    - generic [ref=e21]:
+      - button "skip" [ref=e22] [cursor=pointer]
+      - button "next →" [ref=e23] [cursor=pointer]

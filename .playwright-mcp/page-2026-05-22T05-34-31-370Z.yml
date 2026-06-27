@@ -1,0 +1,8 @@
+- generic [ref=e3]:
+  - heading "The Person Behind the Records" [level=1] [ref=e4]
+  - paragraph [ref=e5]: Genealogy records give names, dates and places. They rarely tell you what a life felt like. This tool turns what you already know about one person into a clearer, more human starting point. It does not invent facts. Short answers and clearly-marked guesses are fine.
+  - paragraph [ref=e6]: Use it for one ancestor or relative at a time.
+  - generic [ref=e8]:
+    - button "resume where I left off" [ref=e9] [cursor=pointer]
+    - button "start over (clear saved)" [ref=e10] [cursor=pointer]
+    - button "begin →" [ref=e11] [cursor=pointer]

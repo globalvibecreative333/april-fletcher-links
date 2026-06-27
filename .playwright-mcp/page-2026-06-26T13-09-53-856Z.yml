@@ -1,0 +1,163 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "❋ Creative Equity Hub" [ref=e4] [cursor=pointer]:
+        - /url: "#"
+      - generic [ref=e5]:
+        - generic [ref=e6]: Bridge Offer
+        - generic [ref=e7]: ●
+        - generic [ref=e8]: $300
+        - generic [ref=e9]: ●
+        - generic [ref=e10]: No Live Call
+  - main [ref=e11]:
+    - generic [ref=e13]:
+      - generic [ref=e14]: Custom AI Task Walkthrough
+      - heading "One business task. One custom AI walkthrough. No live call required." [level=1] [ref=e15]:
+        - generic [ref=e16]: One business task.
+        - generic [ref=e17]: One custom AI walkthrough.
+        - generic [ref=e18]: No live call required.
+      - generic [ref=e19]:
+        - paragraph [ref=e20]: You know there's probably a way to do this faster with ChatGPT — you just don't want to figure it out from scratch. Send me the task. I record a custom screen-share, then hand you the prompts and simple instructions so you can repeat the process.
+        - generic [ref=e21]:
+          - link "Send your task →" [ref=e22] [cursor=pointer]:
+            - /url: mailto:creativeequityhub@gmail.com?subject=Custom%20AI%20Task%20Walkthrough%20%E2%80%94%20task%20submission&body=Hi%20April%2C%0A%0AHere%27s%20the%20task%20I%27d%20like%20a%20walkthrough%20for.%0A%0A1.%20What%20business%20task%20do%20you%20want%20help%20with%3F%0A%0A%0A2.%20Where%20is%20the%20current%20version%3F%20%28Paste%20the%20text%20or%20link.%29%0A%0A%0A3.%20Who%20is%20this%20for%3F%0A%0A%0A4.%20What%20do%20you%20want%20the%20finished%20version%20to%20help%20you%20do%3F%0A%0A%0A5.%20What%20tone%20or%20style%20should%20it%20have%3F%0A%0A%0A6.%20Where%20will%20you%20use%20this%20after%20it%20is%20done%3F%0A%0A%0AThanks%2C
+            - text: Send your task
+            - generic [ref=e23]: →
+          - paragraph [ref=e24]: $300 · Delivered in 3–5 business days
+    - generic [ref=e26]:
+      - generic [ref=e28]: 01 — What this is
+      - generic [ref=e29]:
+        - paragraph [ref=e30]: A custom walkthrough for one specific business task — not a class, not coaching, not unlimited AI training. You send the task. I figure out the ChatGPT workflow. You get the video, the prompts and the instructions to do it again on your own.
+        - blockquote [ref=e31]: You don't need to learn AI from scratch. You need one business task finished in a way you can repeat.
+    - generic [ref=e33]:
+      - generic [ref=e34]:
+        - generic [ref=e35]: 02 — Best tasks for this
+        - paragraph [ref=e36]: Pick one. Bring the raw material you already have.
+      - list [ref=e37]:
+        - button "Copy \"Improve a Craigslist ad\" to clipboard" [ref=e38] [cursor=pointer]:
+          - generic [ref=e39]: "01"
+          - heading "Improve a Craigslist ad" [level=3] [ref=e40]
+          - paragraph [ref=e41]: Your ad already has the raw material. We turn it into a clearer version you can reuse.
+          - text: ✓ Copied
+        - button "Copy \"Rewrite a service description\" to clipboard" [ref=e42] [cursor=pointer]:
+          - generic [ref=e43]: "02"
+          - heading "Rewrite a service description" [level=3] [ref=e44]
+          - paragraph [ref=e45]: From vague to specific, so people understand what you do and why to book.
+          - text: ✓ Copied
+        - button "Copy \"Clean up a business bio\" to clipboard" [ref=e46] [cursor=pointer]:
+          - generic [ref=e47]: "03"
+          - heading "Clean up a business bio" [level=3] [ref=e48]
+          - paragraph [ref=e49]: One short, usable bio you can drop into a profile, pitch or directory.
+          - text: ✓ Copied
+        - button "Copy \"Create a simple FAQ\" to clipboard" [ref=e50] [cursor=pointer]:
+          - generic [ref=e51]: "04"
+          - heading "Create a simple FAQ" [level=3] [ref=e52]
+          - paragraph [ref=e53]: The five questions every customer asks, written so they answer themselves.
+          - text: ✓ Copied
+        - button "Copy \"Draft follow-up messages\" to clipboard" [ref=e54] [cursor=pointer]:
+          - generic [ref=e55]: "05"
+          - heading "Draft follow-up messages" [level=3] [ref=e56]
+          - paragraph [ref=e57]: A short, reusable sequence for leads who go quiet after the first reply.
+          - text: ✓ Copied
+        - button "Copy \"Turn reviews into posts\" to clipboard" [ref=e58] [cursor=pointer]:
+          - generic [ref=e59]: "06"
+          - heading "Turn reviews into posts" [level=3] [ref=e60]
+          - paragraph [ref=e61]: Your existing reviews become marketing copy you can use this week.
+          - text: ✓ Copied
+        - button "Copy \"Create content prompts\" to clipboard" [ref=e62] [cursor=pointer]:
+          - generic [ref=e63]: "07"
+          - heading "Create content prompts" [level=3] [ref=e64]
+          - paragraph [ref=e65]: A week of post ideas built from what you already do, not random topics.
+          - text: ✓ Copied
+        - button "Copy \"Improve a Google Business description\" to clipboard" [ref=e66] [cursor=pointer]:
+          - generic [ref=e67]: "08"
+          - heading "Improve a Google Business description" [level=3] [ref=e68]
+          - paragraph [ref=e69]: Make the description match the actual reason people book you.
+          - text: ✓ Copied
+        - button "Copy \"Turn rough notes into a promo post\" to clipboard" [ref=e70] [cursor=pointer]:
+          - generic [ref=e71]: "09"
+          - heading "Turn rough notes into a promo post" [level=3] [ref=e72]
+          - paragraph [ref=e73]: Bring the messy version. We shape it into something you can publish.
+          - text: ✓ Copied
+    - generic [ref=e75]:
+      - generic [ref=e77]: 03 — What you get
+      - list [ref=e78]:
+        - listitem [ref=e79]:
+          - generic [ref=e80]: A
+          - heading "Custom screen-share video" [level=3] [ref=e81]
+          - paragraph [ref=e82]: 15–30 minutes, recorded around your specific task. Rewatch as often as you need.
+        - listitem [ref=e83]:
+          - generic [ref=e84]: B
+          - heading "Prompt sequence" [level=3] [ref=e85]
+          - paragraph [ref=e86]: The exact prompts I used, cleaned up so you can copy and reuse them.
+        - listitem [ref=e87]:
+          - generic [ref=e88]: C
+          - heading "Written instruction packet" [level=3] [ref=e89]
+          - paragraph [ref=e90]: A short guide explaining what was done, why it matters and how to repeat the process.
+        - listitem [ref=e91]:
+          - generic [ref=e92]: D
+          - heading "Optional sample output" [level=3] [ref=e93]
+          - paragraph [ref=e94]: Depending on the task — the improved ad, bio, FAQ, description or content draft generated during the walkthrough.
+    - generic [ref=e96]:
+      - generic [ref=e98]: 04 — How it works
+      - list [ref=e99]:
+        - listitem [ref=e100]:
+          - generic [ref=e101]: "01"
+          - generic [ref=e102]:
+            - heading "Send your task" [level=3] [ref=e103]
+            - paragraph [ref=e104]: Email me a short description of the task and any current copy or link.
+        - listitem [ref=e105]:
+          - generic [ref=e106]: "02"
+          - generic [ref=e107]:
+            - heading "I review the fit" [level=3] [ref=e108]
+            - paragraph [ref=e109]: If it's a match, I send a payment link. If it's outside the scope of this offer, I tell you.
+        - listitem [ref=e110]:
+          - generic [ref=e111]: "03"
+          - generic [ref=e112]:
+            - heading "I record the walkthrough" [level=3] [ref=e113]
+            - paragraph [ref=e114]: Custom screen-share video built around your specific task.
+        - listitem [ref=e115]:
+          - generic [ref=e116]: "04"
+          - generic [ref=e117]:
+            - heading "You receive the packet" [level=3] [ref=e118]
+            - paragraph [ref=e119]: Video plus prompt sequence plus written instructions, delivered in 3–5 business days.
+        - listitem [ref=e120]:
+          - generic [ref=e121]: "05"
+          - generic [ref=e122]:
+            - heading "You reuse the process" [level=3] [ref=e123]
+            - paragraph [ref=e124]: Use the prompts and instructions to repeat the same approach on your own.
+    - generic [ref=e126]:
+      - generic [ref=e128]: 05 — Scope
+      - paragraph [ref=e129]: "This walkthrough covers one specific business task. It is not:"
+      - generic [ref=e130]:
+        - list [ref=e131]:
+          - listitem [ref=e132]: — A full marketing strategy
+          - listitem [ref=e133]: — A website rewrite
+          - listitem [ref=e134]: — Business coaching
+          - listitem [ref=e135]: — Unlimited AI training
+          - listitem [ref=e136]: — A done-for-you content package
+          - listitem [ref=e137]: — A full automation build
+        - blockquote [ref=e138]: I review every task before sending a payment link. Either way, you'll hear back from me within a business day.
+    - generic [ref=e140]:
+      - generic [ref=e142]: 06 — Price
+      - generic [ref=e143]:
+        - generic [ref=e144]: $300
+        - paragraph [ref=e145]:
+          - text: One task. One walkthrough.
+          - text: Delivered in 3–5 business days.
+          - text: No live call required.
+    - generic [ref=e148]:
+      - heading "Send the task you keep avoiding." [level=2] [ref=e149]
+      - link "Send your task →" [ref=e150] [cursor=pointer]:
+        - /url: mailto:creativeequityhub@gmail.com?subject=Custom%20AI%20Task%20Walkthrough%20%E2%80%94%20task%20submission&body=Hi%20April%2C%0A%0AHere%27s%20the%20task%20I%27d%20like%20a%20walkthrough%20for.%0A%0A1.%20What%20business%20task%20do%20you%20want%20help%20with%3F%0A%0A%0A2.%20Where%20is%20the%20current%20version%3F%20%28Paste%20the%20text%20or%20link.%29%0A%0A%0A3.%20Who%20is%20this%20for%3F%0A%0A%0A4.%20What%20do%20you%20want%20the%20finished%20version%20to%20help%20you%20do%3F%0A%0A%0A5.%20What%20tone%20or%20style%20should%20it%20have%3F%0A%0A%0A6.%20Where%20will%20you%20use%20this%20after%20it%20is%20done%3F%0A%0A%0AThanks%2C
+        - text: Send your task
+        - generic [ref=e151]: →
+      - paragraph [ref=e152]: All tasks are reviewed before payment. Not every task is a fit — and that's okay.
+  - contentinfo [ref=e153]:
+    - generic [ref=e154]:
+      - link "❋ Creative Equity Hub" [ref=e155] [cursor=pointer]:
+        - /url: "#"
+      - generic [ref=e156]:
+        - generic [ref=e157]: creativeequityhub@gmail.com
+        - generic [ref=e158]: ●
+        - generic [ref=e159]: MMXXVI

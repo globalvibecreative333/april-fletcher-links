@@ -1,0 +1,12 @@
+- generic [ref=e10]:
+  - generic [ref=e330]: SECTION 12 OF 13 · HISTORICAL / COMMUNITY CONTEXT
+  - heading "Historical / community context" [level=2] [ref=e331]
+  - paragraph [ref=e332]: Only if known. Do not invent.
+  - generic [ref=e333]:
+    - generic [ref=e334]: Historical or community context, if known
+    - textbox "wars, migrations, industries, laws, local events overlapping their life" [ref=e335]
+  - generic [ref=e336]:
+    - button "← back" [ref=e337] [cursor=pointer]
+    - generic [ref=e338]:
+      - button "skip" [ref=e339] [cursor=pointer]
+      - button "next →" [ref=e340] [cursor=pointer]

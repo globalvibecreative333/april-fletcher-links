@@ -1,0 +1,1 @@
+- generic [ref=e2]: "2 FAILED (1 passed, 2 failed) PASS buildProfile is defined FAIL newState() returns object FAIL threw: newState is not defined"

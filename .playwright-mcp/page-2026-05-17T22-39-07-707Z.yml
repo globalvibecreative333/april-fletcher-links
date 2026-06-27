@@ -1,0 +1,1 @@
+- generic [ref=e2]: "2 FAILED (4 passed, 2 failed) PASS buildProfile is defined PASS newState() returns object PASS save/load round-trips a field PASS clearState wipes storage FAIL renderWelcome is defined FAIL threw: hasSavedState is not defined"

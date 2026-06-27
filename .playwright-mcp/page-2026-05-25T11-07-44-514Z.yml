@@ -1,0 +1,11 @@
+- generic [ref=e54]:
+  - generic [ref=e55]: THE PERSON BEHIND THE RECORDS · <SCRIPT>ALERT(1)</SCRIPT>
+  - heading "<script>alert(1)</script>" [level=2] [ref=e56]
+  - generic [ref=e57]: "## 1. Known Facts Summary <script>alert(1)</script>. ## 2. Person Context Map - Name: <script>alert(1)</script> ## 8. Short Life Sketch Starter (uncertainty marked — do not invent details) Paragraph 1 — Basic identity: <script>alert(1)</script>. Paragraph 2 — Life context: (world they lived in — add notes) Paragraph 3 — Work, family or community role: (what they did / who depended on them) Paragraph 4 — What stands out: (the detail that makes them more than a name) Paragraph 5 — Open questions: (what still needs research or family conversation) ## 9. ChatGPT Continuation Prompt (copy & paste this) I am working on a family-history story about <script>alert(1)</script>. Do not invent facts. Use only the information I provide. Here is what I know: <script>alert(1)</script> Places connected to this person: (places) Known records and sources: (sources) Family or social context: (context) Open questions: (open questions) Help me organize this into a short \"person behind the records\" starter profile. Please include: 1. A plain-language summary of what is known 2. A possible life-context section 3. A list of story angles that fit the facts 4. A list of open questions for future research 5. A short life sketch draft that clearly marks uncertainty and does not invent details ## 10. Research Next Steps Suggested records or sources to look for next: - Census records - Newspapers - City directories - Church records - Land records - Military records - Probate records - Cemetery records Pick no more than three next steps. Do not turn this into an endless rabbit hole."
+  - generic [ref=e58]:
+    - button "← edit answers" [ref=e59] [cursor=pointer]
+    - generic [ref=e60]:
+      - button "copy" [active] [ref=e61] [cursor=pointer]
+      - button "email to me" [ref=e62] [cursor=pointer]
+      - button "print / save PDF" [ref=e63] [cursor=pointer]
+  - paragraph [ref=e64]: copied.

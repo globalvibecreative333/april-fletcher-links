@@ -1,0 +1,80 @@
+- generic [ref=e10]:
+  - generic [ref=e152]: SECTION 7 OF 13 · PRESSURE POINTS
+  - heading "Pressure points" [level=2] [ref=e153]
+  - paragraph [ref=e154]: Forces that may have shaped their choices. Check any that may apply.
+  - generic [ref=e155]:
+    - generic [ref=e156]: Possible pressure points
+    - generic [ref=e157]:
+      - checkbox "Migration" [ref=e158]
+      - text: Migration
+    - generic [ref=e159]:
+      - checkbox "Marriage" [ref=e160]
+      - text: Marriage
+    - generic [ref=e161]:
+      - checkbox "Childbirth" [ref=e162]
+      - text: Childbirth
+    - generic [ref=e163]:
+      - checkbox "Widowhood" [ref=e164]
+      - text: Widowhood
+    - generic [ref=e165]:
+      - checkbox "Divorce or separation" [ref=e166]
+      - text: Divorce or separation
+    - generic [ref=e167]:
+      - checkbox "Death of a parent, spouse, child or sibling" [ref=e168]
+      - text: Death of a parent, spouse, child or sibling
+    - generic [ref=e169]:
+      - checkbox "War or military service" [ref=e170]
+      - text: War or military service
+    - generic [ref=e171]:
+      - checkbox "Immigration" [ref=e172]
+      - text: Immigration
+    - generic [ref=e173]:
+      - checkbox "Enslavement, emancipation or racial restriction" [ref=e174]
+      - text: Enslavement, emancipation or racial restriction
+    - generic [ref=e175]:
+      - checkbox "Segregation or discriminatory law" [ref=e176]
+      - text: Segregation or discriminatory law
+    - generic [ref=e177]:
+      - checkbox "Religious pressure or community expectations" [ref=e178]
+      - text: Religious pressure or community expectations
+    - generic [ref=e179]:
+      - checkbox "Poverty or economic hardship" [ref=e180]
+      - text: Poverty or economic hardship
+    - generic [ref=e181]:
+      - checkbox "Land loss or property gain" [ref=e182]
+      - text: Land loss or property gain
+    - generic [ref=e183]:
+      - checkbox "Illness or disability" [ref=e184]
+      - text: Illness or disability
+    - generic [ref=e185]:
+      - checkbox "Work injury" [ref=e186]
+      - text: Work injury
+    - generic [ref=e187]:
+      - checkbox "Natural disaster" [ref=e188]
+      - text: Natural disaster
+    - generic [ref=e189]:
+      - checkbox "Family conflict" [ref=e190]
+      - text: Family conflict
+    - generic [ref=e191]:
+      - checkbox "Legal trouble" [ref=e192]
+      - text: Legal trouble
+    - generic [ref=e193]:
+      - checkbox "Name change" [ref=e194]
+      - text: Name change
+    - generic [ref=e195]:
+      - checkbox "Language or cultural transition" [ref=e196]
+      - text: Language or cultural transition
+    - generic [ref=e197]:
+      - checkbox "Education access or lack of access" [ref=e198]
+      - text: Education access or lack of access
+    - generic [ref=e199]:
+      - checkbox "Unknown parentage or family secrecy" [ref=e200]
+      - text: Unknown parentage or family secrecy
+  - generic [ref=e201]:
+    - generic [ref=e202]: Notes on pressure points
+    - textbox "What shaped their options? What changed in their lifetime? What did they adapt to?" [ref=e203]
+  - generic [ref=e204]:
+    - button "← back" [ref=e205] [cursor=pointer]
+    - generic [ref=e206]:
+      - button "skip" [ref=e207] [cursor=pointer]
+      - button "next →" [ref=e208] [cursor=pointer]

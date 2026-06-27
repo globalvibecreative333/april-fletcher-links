@@ -1,0 +1,1163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Setlist Time Calculator</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+  /* Brand palette
+     Orange: #F08534  Orange-deep: #D96E1F  Cream: #FBF9EE  Charcoal: #2F3432 */
+  :root {
+    --bg: #1c1f1e;
+    --panel: #252827;
+    --panel-2: #2c2f2e;
+    --border: #3a3e3c;
+    --border-strong: #4a4f4d;
+    --text: #FBF9EE;
+    --text-muted: #b9b8ad;
+    --text-dim: #8a8a82;
+    --accent: #F08534;
+    --accent-soft: #D96E1F;
+    --accent-bg: rgba(240, 133, 52, 0.16);
+    --accent-border: rgba(240, 133, 52, 0.50);
+    --info: #F08534;
+    --info-bg: rgba(240, 133, 52, 0.10);
+    --info-border: rgba(240, 133, 52, 0.35);
+    --warn: #e25a3c;
+    --warn-bg: rgba(226, 90, 60, 0.14);
+    --warn-border: rgba(226, 90, 60, 0.45);
+    --ok: #6db26b;
+    --ok-bg: rgba(109, 178, 107, 0.14);
+    --ok-border: rgba(109, 178, 107, 0.45);
+    --shadow: 0 1px 0 rgba(255,255,255,0.02), 0 8px 28px rgba(0,0,0,0.35);
+    --radius: 14px;
+    --radius-sm: 10px;
+  }
+  html[data-theme="light"] {
+    --bg: #FBF9EE;
+    --panel: #ffffff;
+    --panel-2: #F4F1E2;
+    --border: #E6E2D1;
+    --border-strong: #D6D0BA;
+    --text: #2F3432;
+    --text-muted: #5b605d;
+    --text-dim: #8a8e8a;
+    --accent: #D96E1F;
+    --accent-soft: #B95A12;
+    --accent-bg: rgba(217, 110, 31, 0.10);
+    --accent-border: rgba(217, 110, 31, 0.40);
+    --info: #D96E1F;
+    --info-bg: rgba(217, 110, 31, 0.08);
+    --info-border: rgba(217, 110, 31, 0.30);
+    --warn: #C84A24;
+    --warn-bg: rgba(200, 74, 36, 0.10);
+    --warn-border: rgba(200, 74, 36, 0.40);
+    --ok: #4f8a4d;
+    --ok-bg: rgba(79, 138, 77, 0.10);
+    --ok-border: rgba(79, 138, 77, 0.40);
+    --shadow: 0 1px 0 rgba(0,0,0,0.02), 0 6px 20px rgba(47, 52, 50, 0.07);
+  }
+
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand-icon { color: var(--accent); font-size: 22px; line-height: 1; }
+  .brand-title { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; }
+  .header-right { display: flex; align-items: center; gap: 10px; }
+  .install-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background .15s ease, border-color .15s ease;
+  }
+  .install-btn:hover { background: var(--panel); border-color: var(--border-strong); }
+  .install-btn[hidden] { display: none; }
+  .icon-btn {
+    width: 36px; height: 36px;
+    border-radius: 999px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+    display: inline-flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: background .15s ease, border-color .15s ease;
+  }
+  .icon-btn:hover { background: var(--panel-2); border-color: var(--border-strong); }
+
+  main { max-width: 720px; margin: 0 auto; padding: 28px 20px 80px; }
+  .lede { text-align: center; color: var(--text); font-size: 22px; font-weight: 700; line-height: 1.35; margin: 10px auto 20px; max-width: 620px; letter-spacing: -0.01em; }
+  .lede-strong { font-size: 22px; font-weight: 700; }
+  .about-inline {
+    max-width: 640px; margin: 0 auto 28px;
+    color: var(--text-muted); line-height: 1.6; font-size: 14.5px;
+    text-align: center;
+  }
+
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 18px;
+    box-shadow: var(--shadow);
+  }
+  .card-label {
+    display: flex; align-items: center; gap: 10px;
+    color: var(--text-muted); font-size: 14px; font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .card-label svg { width: 18px; height: 18px; opacity: .9; }
+  .songs-card .card-label { color: var(--text); font-size: 16px; }
+  .songs-label { justify-content: space-between; }
+  .songs-counter { color: var(--text-muted); font-size: 13px; font-weight: 500; }
+  .songs-counter.maxed { color: var(--accent); }
+
+  .song-row {
+    display: grid;
+    grid-template-columns: 24px 24px 1fr 90px;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+  }
+  .song-row + .song-row { border-top: 1px solid var(--border); }
+  .drag-handle {
+    color: var(--text-dim);
+    cursor: grab;
+    display: inline-flex;
+    user-select: none;
+    padding: 4px;
+  }
+  .drag-handle:active { cursor: grabbing; }
+  .song-row.dragging { opacity: 0.4; }
+  .song-row.drag-over { box-shadow: inset 0 2px 0 var(--accent); }
+
+  .delete-btn {
+    background: transparent; border: 0;
+    color: var(--text-dim); cursor: pointer;
+    padding: 4px; display: inline-flex; border-radius: 6px;
+  }
+  .delete-btn:hover { color: #ef4444; background: rgba(239,68,68,0.08); }
+
+  input.text-input, input.time-input {
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    padding: 10px 12px;
+    font-size: 14px;
+    width: 100%;
+    outline: none;
+    transition: border-color .15s ease, box-shadow .15s ease;
+    font-family: inherit;
+  }
+  input.text-input:focus, input.time-input:focus {
+    border-color: var(--accent-border);
+    box-shadow: 0 0 0 3px var(--accent-bg);
+  }
+  input.time-input {
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+    width: 90px;
+  }
+
+  .add-song {
+    width: 100%;
+    margin-top: 14px;
+    padding: 12px;
+    background: transparent;
+    border: 1px dashed var(--border-strong);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    font-size: 14px; font-weight: 500;
+    cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    transition: background .15s ease, border-color .15s ease;
+  }
+  .add-song:hover { background: var(--panel-2); border-color: var(--accent-border); color: var(--accent); }
+
+  .total-display { text-align: center; padding: 10px 0 4px; }
+  .total-time {
+    font-size: 56px; font-weight: 800; letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums; font-feature-settings: "tnum";
+    line-height: 1;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  .total-time .colon { opacity: .7; padding: 0 4px; }
+  .total-minutes { color: var(--text-muted); margin-top: 10px; font-size: 14px; }
+
+  .target-presets { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+  .preset {
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    padding: 9px 14px;
+    font-size: 13px; font-weight: 600;
+    cursor: pointer;
+    transition: all .15s ease;
+  }
+  .preset:hover { border-color: var(--border-strong); }
+  .preset.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+  .custom-wrap { display: flex; align-items: center; gap: 8px; }
+  .custom-wrap input {
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    padding: 9px 12px;
+    width: 110px;
+    font-size: 14px;
+    outline: none;
+    font-family: inherit;
+  }
+  .custom-wrap input:focus {
+    border-color: var(--accent-border);
+    box-shadow: 0 0 0 3px var(--accent-bg);
+  }
+  .custom-wrap span { color: var(--text-muted); font-size: 14px; }
+
+  .target-status {
+    margin-top: 16px; text-align: center;
+    color: var(--text-dim); font-size: 14px;
+  }
+  .status-pill {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 14px;
+    border-radius: var(--radius-sm);
+    font-size: 15px; font-weight: 600;
+    background: var(--info-bg);
+    border: 1px solid var(--info-border);
+    color: var(--info);
+  }
+  .status-pill.over {
+    background: var(--warn-bg);
+    border-color: var(--warn-border);
+    color: var(--warn);
+  }
+  .status-pill.exact {
+    background: var(--ok-bg);
+    border-color: var(--ok-border);
+    color: var(--ok);
+  }
+
+  .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    background: var(--panel);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 14px; font-weight: 500;
+    cursor: pointer;
+    transition: all .15s ease;
+    font-family: inherit;
+  }
+  .btn:hover { background: var(--panel-2); border-color: var(--border-strong); }
+  .btn svg { width: 16px; height: 16px; }
+  .btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+  .btn-primary:hover { background: var(--accent-soft); border-color: var(--accent-soft); }
+
+  .pro-upsell { margin-top: 20px; }
+  .pro-upsell[hidden] { display: none; }
+  .upsell-head { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 16px; }
+  .upsell-icon {
+    width: 40px; height: 40px;
+    flex: 0 0 40px;
+    border-radius: 10px;
+    background: var(--accent-bg);
+    color: var(--accent);
+    display: inline-flex; align-items: center; justify-content: center;
+    border: 1px solid var(--accent-border);
+  }
+  .upsell-title { font-size: 16px; font-weight: 700; color: var(--text); }
+  .upsell-sub { color: var(--text-muted); font-size: 14px; margin-top: 3px; line-height: 1.45; }
+  .upsell-list { list-style: none; padding: 0; margin: 0 0 18px; }
+  .upsell-list li {
+    display: flex; align-items: center; gap: 10px;
+    padding: 6px 0;
+    color: var(--text);
+    font-size: 14.5px;
+  }
+  .upsell-list li svg { color: var(--accent); flex: 0 0 16px; }
+  .upgrade-btn {
+    width: 100%;
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 13px;
+    border-radius: var(--radius-sm);
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    color: #fff;
+    font-size: 15px; font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background .15s ease, border-color .15s ease;
+  }
+  .upgrade-btn:hover { background: var(--accent-soft); border-color: var(--accent-soft); }
+
+  .saved-list { margin-top: 16px; display: none; }
+  .saved-list.open { display: block; }
+  .saved-item {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    padding: 10px 12px;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    margin-bottom: 8px;
+  }
+  .saved-item-meta { font-size: 13px; color: var(--text-muted); }
+  .saved-item-name { font-weight: 600; font-size: 14px; }
+  .saved-item-actions { display: flex; gap: 6px; }
+  .mini-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .mini-btn:hover { color: var(--text); border-color: var(--border-strong); }
+  .mini-btn.danger:hover { color: #ef4444; border-color: #ef4444; }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 22px 20px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  .modal-backdrop {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.55);
+    display: none;
+    align-items: center; justify-content: center;
+    z-index: 50;
+    padding: 16px;
+  }
+  .modal-backdrop.open { display: flex; }
+  .modal {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+  }
+  .modal h3 { margin: 0 0 14px; font-size: 17px; }
+  .modal input {
+    width: 100%;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    outline: none;
+    margin-bottom: 16px;
+    font-family: inherit;
+  }
+  .modal input:focus { border-color: var(--accent-border); box-shadow: 0 0 0 3px var(--accent-bg); }
+  .modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
+
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--panel);
+    border: 1px solid var(--border-strong);
+    color: var(--text);
+    padding: 10px 16px;
+    border-radius: 999px;
+    font-size: 13px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s ease, transform .2s ease;
+    z-index: 60;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  @media (max-width: 520px) {
+    .brand-title { font-size: 18px; }
+    .total-time { font-size: 44px; }
+    .song-row { grid-template-columns: 22px 22px 1fr 72px; gap: 8px; }
+    input.time-input { width: 72px; padding: 9px 8px; }
+    main { padding: 20px 14px 60px; }
+    .card { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <span class="brand-icon">&#9834;</span>
+    <span class="brand-title">Setlist Time Calculator</span>
+  </div>
+  <div class="header-right">
+    <button id="installBtn" class="install-btn" title="Install as app">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5M12 15V3"/></svg>
+      Install App
+    </button>
+    <button id="themeToggle" class="icon-btn" title="Toggle theme">
+      <svg id="themeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
+    </button>
+  </div>
+</header>
+
+<main>
+  <h1 class="lede lede-strong">Calculate how long your setlist runs and see if you're under or over your target time.</h1>
+  <p class="about-inline">
+    The Setlist Time Calculator helps band leaders and music directors quickly determine the total length of a performance. Enter each song's duration, and the tool automatically adds them together to calculate your total set time. Set a target length to see whether you're under or over time, whether you're planning a 30-minute opening slot or a full 90-minute headline set. This gives you a clear picture of your timing before rehearsal or performance.
+  </p>
+
+  <section class="card songs-card">
+    <div class="card-label songs-label">
+      <span>Songs</span>
+      <span id="songsCounter" class="songs-counter">0/10 songs</span>
+    </div>
+    <div id="songList"></div>
+    <button id="addSong" class="add-song">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+      Add Song
+    </button>
+  </section>
+
+  <section class="card">
+    <div class="card-label">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      Total Set Time
+    </div>
+    <div class="total-display">
+      <div class="total-time"><span id="totalMM">00</span><span class="colon">:</span><span id="totalSS">00</span></div>
+      <div class="total-minutes" id="totalMinutes">(0 minutes)</div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="card-label">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+      Target Set Length
+    </div>
+    <div class="target-presets">
+      <button class="preset" data-min="30">30 min</button>
+      <button class="preset" data-min="60">60 min</button>
+      <button class="preset" data-min="90">90 min</button>
+    </div>
+    <div class="custom-wrap">
+      <input id="customTarget" type="number" min="0" step="1" placeholder="Custom" inputmode="numeric" />
+      <span>minutes</span>
+    </div>
+    <div id="targetStatus" class="target-status">Select a target to compare your setlist</div>
+  </section>
+
+  <div class="actions">
+    <button id="resetBtn" class="btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+      Reset
+    </button>
+    <button id="saveBtn" class="btn btn-primary pro-only" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>
+      Save Setlist
+    </button>
+    <button id="exportTxtBtn" class="btn pro-only" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+      Export Text
+    </button>
+    <button id="exportPdfBtn" class="btn pro-only" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5M12 15V3"/></svg>
+      Export PDF
+    </button>
+  </div>
+
+  <section id="proUpsell" class="card pro-upsell">
+    <div class="upsell-head">
+      <div class="upsell-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 3v3M20.5 4.5h-3M5 18v3M6.5 19.5h-3"/></svg>
+      </div>
+      <div>
+        <div class="upsell-title">Unlock Pro Features</div>
+        <div class="upsell-sub">Get unlimited songs, save setlists, and export options.</div>
+      </div>
+    </div>
+    <ul class="upsell-list">
+      <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Unlimited songs per setlist</li>
+      <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Save multiple setlists</li>
+      <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Export as PDF or text</li>
+    </ul>
+    <button id="upgradeBtn" class="upgrade-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>
+      Upgrade for $7
+    </button>
+  </section>
+
+  <section id="savedSection" class="card saved-list">
+    <div class="card-label">Saved Setlists</div>
+    <div id="savedList"></div>
+  </section>
+</main>
+
+<footer>
+  Setlist Time Calculator &mdash; The easiest way to find out how long is my set<br/>
+  For support, questions, or refund requests, please contact us at <a href="mailto:globalvibecreative@gmail.com">globalvibecreative@gmail.com</a>
+</footer>
+
+<div id="saveModal" class="modal-backdrop">
+  <div class="modal">
+    <h3>Save Setlist</h3>
+    <input id="setlistName" type="text" placeholder="Setlist name (e.g., Fall Tour Opening Set)" />
+    <div class="modal-actions">
+      <button id="saveCancel" class="btn">Cancel</button>
+      <button id="saveConfirm" class="btn btn-primary">Save</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+(function() {
+  const STORAGE = {
+    state: 'stc.state.v1',
+    saved: 'stc.saved.v1',
+    theme: 'stc.theme.v1',
+    pro:   'stc.pro.v1'
+  };
+
+  const SVG_NS = 'http://www.w3.org/2000/svg';
+
+  // Small helpers that avoid innerHTML for user-supplied content.
+  function el(tag, opts) {
+    const node = document.createElement(tag);
+    if (!opts) return node;
+    if (opts.class) node.className = opts.class;
+    if (opts.text != null) node.textContent = opts.text;
+    if (opts.attrs) for (const k in opts.attrs) node.setAttribute(k, opts.attrs[k]);
+    if (opts.title) node.title = opts.title;
+    return node;
+  }
+  function svg(viewBox, paths, size) {
+    const s = document.createElementNS(SVG_NS, 'svg');
+    s.setAttribute('viewBox', viewBox);
+    s.setAttribute('fill', 'none');
+    s.setAttribute('stroke', 'currentColor');
+    s.setAttribute('stroke-width', '2');
+    s.setAttribute('stroke-linecap', 'round');
+    s.setAttribute('stroke-linejoin', 'round');
+    if (size) { s.setAttribute('width', size); s.setAttribute('height', size); }
+    paths.forEach(d => {
+      const p = document.createElementNS(SVG_NS, 'path');
+      p.setAttribute('d', d);
+      s.appendChild(p);
+    });
+    return s;
+  }
+
+  // ---------- State ----------
+  let songs = [];     // [{id, title, mm, ss}]
+  let target = null;  // minutes or null
+  let isPro = false;
+
+  function uid() { return Math.random().toString(36).slice(2, 9); }
+  function blankSong() { return { id: uid(), title: '', mm: '', ss: '' }; }
+
+  function loadState() {
+    try {
+      const s = JSON.parse(localStorage.getItem(STORAGE.state) || 'null');
+      if (s && Array.isArray(s.songs)) {
+        songs = s.songs.map(x => ({ id: x.id || uid(), title: x.title || '', mm: x.mm || '', ss: x.ss || '' }));
+        target = (typeof s.target === 'number') ? s.target : null;
+      }
+    } catch (e) {}
+    if (songs.length === 0) songs.push(blankSong());
+    isPro = localStorage.getItem(STORAGE.pro) === '1';
+  }
+  function saveState() {
+    localStorage.setItem(STORAGE.state, JSON.stringify({ songs, target }));
+  }
+
+  // ---------- Theme ----------
+  function setThemeIcon(theme) {
+    const host = document.getElementById('themeIcon');
+    while (host.firstChild) host.removeChild(host.firstChild);
+    const paths = theme === 'light'
+      ? ['M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z']
+      : [];
+    paths.forEach(d => {
+      const p = document.createElementNS(SVG_NS, 'path');
+      p.setAttribute('d', d);
+      host.appendChild(p);
+    });
+    if (theme !== 'light') {
+      const c = document.createElementNS(SVG_NS, 'circle');
+      c.setAttribute('cx','12'); c.setAttribute('cy','12'); c.setAttribute('r','4');
+      host.appendChild(c);
+      ['M12 2v2','M12 20v2','M4.93 4.93l1.41 1.41','M17.66 17.66l1.41 1.41','M2 12h2','M20 12h2','M4.93 19.07l1.41-1.41','M17.66 6.34l1.41-1.41'].forEach(d => {
+        const p = document.createElementNS(SVG_NS, 'path');
+        p.setAttribute('d', d);
+        host.appendChild(p);
+      });
+    }
+  }
+  function applyTheme(t) {
+    document.documentElement.setAttribute('data-theme', t);
+    setThemeIcon(t);
+  }
+  function initTheme() {
+    const saved = localStorage.getItem(STORAGE.theme) || 'dark';
+    applyTheme(saved);
+  }
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    const cur = document.documentElement.getAttribute('data-theme') || 'dark';
+    const next = cur === 'dark' ? 'light' : 'dark';
+    localStorage.setItem(STORAGE.theme, next);
+    applyTheme(next);
+  });
+
+  // ---------- Pro ----------
+  const FREE_SONG_LIMIT = 10;
+  function applyPro() {
+    document.querySelectorAll('.pro-only').forEach(el => { el.hidden = !isPro; });
+    document.getElementById('proUpsell').hidden = isPro;
+    const savedSec = document.getElementById('savedSection');
+    if (isPro && getSaved().length > 0) savedSec.classList.add('open');
+    else savedSec.classList.remove('open');
+    updateSongCounter();
+    renderSaved();
+  }
+  function setPro(state) {
+    isPro = !!state;
+    localStorage.setItem(STORAGE.pro, isPro ? '1' : '0');
+    applyPro();
+  }
+  document.getElementById('upgradeBtn').addEventListener('click', () => {
+    // Demo unlock — real build wires this to checkout
+    setPro(true);
+    toast('Pro unlocked — save & export are live');
+  });
+
+  // ---------- Install (PWA) ----------
+  let deferredInstall = null;
+  const installBtn = document.getElementById('installBtn');
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredInstall = e;
+    installBtn.hidden = false;
+  });
+  installBtn.addEventListener('click', async () => {
+    if (deferredInstall) {
+      deferredInstall.prompt();
+      await deferredInstall.userChoice;
+      deferredInstall = null;
+      installBtn.hidden = true;
+    } else {
+      toast('Add to Home Screen from your browser menu');
+    }
+  });
+
+  // Song counter
+  function updateSongCounter() {
+    const counter = document.getElementById('songsCounter');
+    if (isPro) {
+      counter.textContent = songs.length + ' song' + (songs.length === 1 ? '' : 's');
+      counter.classList.remove('maxed');
+    } else {
+      counter.textContent = songs.length + '/' + FREE_SONG_LIMIT + ' songs';
+      counter.classList.toggle('maxed', songs.length >= FREE_SONG_LIMIT);
+    }
+  }
+
+  // ---------- Songs ----------
+  const songList = document.getElementById('songList');
+
+  function buildSongRow(song) {
+    const row = el('div', { class: 'song-row' });
+    row.draggable = true;
+    row.dataset.id = song.id;
+
+    // Drag handle
+    const handle = el('span', { class: 'drag-handle', title: 'Drag to reorder' });
+    const handleSvg = document.createElementNS(SVG_NS, 'svg');
+    handleSvg.setAttribute('viewBox', '0 0 24 24');
+    handleSvg.setAttribute('width', '14'); handleSvg.setAttribute('height', '14');
+    handleSvg.setAttribute('fill', 'currentColor');
+    [[9,6],[15,6],[9,12],[15,12],[9,18],[15,18]].forEach(([cx,cy]) => {
+      const c = document.createElementNS(SVG_NS, 'circle');
+      c.setAttribute('cx', cx); c.setAttribute('cy', cy); c.setAttribute('r', '1.5');
+      handleSvg.appendChild(c);
+    });
+    handle.appendChild(handleSvg);
+
+    // Delete
+    const del = el('button', { class: 'delete-btn', title: 'Delete song' });
+    del.appendChild(svg('0 0 24 24', ['M3 6h18','M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2','M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6'], 16));
+
+    // Title input — value set via .value (no innerHTML interpolation)
+    const title = el('input', { class: 'text-input', attrs: { type: 'text', placeholder: 'Song title' } });
+    title.value = song.title;
+
+    // Time input
+    const time = el('input', { class: 'time-input', attrs: { type: 'text', placeholder: 'MM:SS', inputmode: 'numeric' } });
+    time.value = formatTimeInputValue(song);
+
+    row.appendChild(handle);
+    row.appendChild(del);
+    row.appendChild(title);
+    row.appendChild(time);
+
+    title.addEventListener('input', () => {
+      song.title = title.value;
+      saveState();
+    });
+    time.addEventListener('input', () => {
+      const parsed = parseTime(time.value);
+      song.mm = parsed.mm;
+      song.ss = parsed.ss;
+      recalc();
+      saveState();
+    });
+    time.addEventListener('blur', () => {
+      time.value = formatTimeInputValue(song);
+    });
+
+    del.addEventListener('click', () => {
+      songs = songs.filter(s => s.id !== song.id);
+      if (songs.length === 0) songs.push(blankSong());
+      renderSongs();
+      updateSongCounter();
+      recalc();
+      saveState();
+    });
+
+    row.addEventListener('dragstart', (e) => {
+      row.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', song.id);
+    });
+    row.addEventListener('dragend', () => {
+      row.classList.remove('dragging');
+      document.querySelectorAll('.song-row').forEach(r => r.classList.remove('drag-over'));
+    });
+    row.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      document.querySelectorAll('.song-row').forEach(r => r.classList.remove('drag-over'));
+      row.classList.add('drag-over');
+    });
+    row.addEventListener('drop', (e) => {
+      e.preventDefault();
+      row.classList.remove('drag-over');
+      const fromId = e.dataTransfer.getData('text/plain');
+      if (!fromId || fromId === song.id) return;
+      const fromIdx = songs.findIndex(s => s.id === fromId);
+      const toIdx = songs.findIndex(s => s.id === song.id);
+      if (fromIdx < 0 || toIdx < 0) return;
+      const [moved] = songs.splice(fromIdx, 1);
+      songs.splice(toIdx, 0, moved);
+      renderSongs();
+      recalc();
+      saveState();
+    });
+
+    return row;
+  }
+
+  function renderSongs() {
+    while (songList.firstChild) songList.removeChild(songList.firstChild);
+    songs.forEach(song => songList.appendChild(buildSongRow(song)));
+  }
+
+  function parseTime(input) {
+    if (!input) return { mm: '', ss: '' };
+    const cleaned = input.replace(/[^0-9:]/g, '');
+    if (cleaned.includes(':')) {
+      const [m, s] = cleaned.split(':');
+      return { mm: m || '', ss: (s || '').slice(0, 2) };
+    }
+    const digits = cleaned;
+    if (digits.length <= 2) return { mm: '', ss: digits };
+    const ss = digits.slice(-2);
+    const mm = digits.slice(0, -2);
+    return { mm, ss };
+  }
+
+  function formatTimeInputValue(song) {
+    if (!song.mm && !song.ss) return '';
+    const m = (song.mm || '0').replace(/^0+(?=\d)/, '') || '0';
+    const s = (song.ss || '0').padStart(2, '0').slice(0, 2);
+    return m + ':' + s;
+  }
+
+  function songSeconds(song) {
+    const m = parseInt(song.mm || '0', 10) || 0;
+    const s = parseInt(song.ss || '0', 10) || 0;
+    return m * 60 + Math.min(s, 59);
+  }
+
+  function totalSeconds() {
+    return songs.reduce((acc, s) => acc + songSeconds(s), 0);
+  }
+
+  document.getElementById('addSong').addEventListener('click', () => {
+    if (!isPro && songs.length >= FREE_SONG_LIMIT) {
+      toast('Free plan caps at ' + FREE_SONG_LIMIT + ' songs — upgrade for unlimited');
+      document.getElementById('proUpsell').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    songs.push(blankSong());
+    renderSongs();
+    updateSongCounter();
+    saveState();
+    const inputs = songList.querySelectorAll('input.text-input');
+    if (inputs.length) inputs[inputs.length - 1].focus();
+  });
+
+  // ---------- Target ----------
+  const presets = document.querySelectorAll('.preset');
+  const customInput = document.getElementById('customTarget');
+
+  function setTarget(min, fromCustom) {
+    target = (min === null || isNaN(min)) ? null : min;
+    presets.forEach(p => {
+      p.classList.toggle('active', !fromCustom && target !== null && Number(p.dataset.min) === target);
+    });
+    if (!fromCustom) customInput.value = '';
+    recalc();
+    saveState();
+  }
+
+  presets.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const m = Number(btn.dataset.min);
+      if (target === m && !customInput.value) setTarget(null);
+      else setTarget(m);
+    });
+  });
+  customInput.addEventListener('input', () => {
+    const v = customInput.value.trim();
+    if (!v) { setTarget(null, true); return; }
+    setTarget(parseInt(v, 10), true);
+  });
+
+  // ---------- Totals + status ----------
+  function recalc() {
+    const sec = totalSeconds();
+    const mm = Math.floor(sec / 60);
+    const ss = sec % 60;
+    document.getElementById('totalMM').textContent = String(mm).padStart(2, '0');
+    document.getElementById('totalSS').textContent = String(ss).padStart(2, '0');
+    const mins = Math.round(sec / 60);
+    document.getElementById('totalMinutes').textContent = '(' + mins + ' minute' + (mins === 1 ? '' : 's') + ')';
+
+    const status = document.getElementById('targetStatus');
+    while (status.firstChild) status.removeChild(status.firstChild);
+
+    if (target === null || isNaN(target)) {
+      status.className = 'target-status';
+      status.textContent = 'Select a target to compare your setlist';
+      return;
+    }
+    const targetSec = target * 60;
+    const diff = sec - targetSec;
+
+    if (diff === 0) {
+      status.className = 'status-pill exact';
+      status.appendChild(svg('0 0 24 24', ['M20 6 9 17l-5-5'], 16));
+      status.appendChild(document.createTextNode(' Exactly on target'));
+    } else if (diff < 0) {
+      status.className = 'status-pill';
+      status.appendChild(svg('0 0 24 24', ['M7 7l10 10','M17 7v10H7'], 16));
+      status.appendChild(document.createTextNode(' ' + diffText(-diff) + ' under'));
+    } else {
+      status.className = 'status-pill over';
+      status.appendChild(svg('0 0 24 24', ['M7 17 17 7','M7 7h10v10'], 16));
+      status.appendChild(document.createTextNode(' ' + diffText(diff) + ' over'));
+    }
+  }
+  function diffText(absSec) {
+    const m = Math.floor(absSec / 60);
+    const s = absSec % 60;
+    if (m === 0) return s + 's';
+    if (s === 0) return m + ' min';
+    return m + ' min ' + s + 's';
+  }
+
+  // ---------- Reset ----------
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    if (!confirm('Reset the current setlist?')) return;
+    songs = [blankSong()];
+    setTarget(null);
+    customInput.value = '';
+    renderSongs();
+    updateSongCounter();
+    recalc();
+    saveState();
+    toast('Setlist reset');
+  });
+
+  // ---------- Save / Saved list ----------
+  function getSaved() {
+    try { return JSON.parse(localStorage.getItem(STORAGE.saved) || '[]'); }
+    catch (e) { return []; }
+  }
+  function putSaved(arr) {
+    localStorage.setItem(STORAGE.saved, JSON.stringify(arr));
+  }
+
+  const modal = document.getElementById('saveModal');
+  const nameInput = document.getElementById('setlistName');
+
+  document.getElementById('saveBtn').addEventListener('click', () => {
+    if (!isPro) {
+      toast('Save requires Pro');
+      return;
+    }
+    nameInput.value = 'Setlist ' + new Date().toLocaleDateString();
+    modal.classList.add('open');
+    setTimeout(() => nameInput.focus(), 50);
+  });
+  document.getElementById('saveCancel').addEventListener('click', () => modal.classList.remove('open'));
+  modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('open'); });
+  document.getElementById('saveConfirm').addEventListener('click', () => {
+    const name = nameInput.value.trim() || 'Untitled Setlist';
+    const saved = getSaved();
+    saved.unshift({
+      id: uid(),
+      name,
+      savedAt: Date.now(),
+      songs: songs.map(s => ({ title: s.title, mm: s.mm, ss: s.ss })),
+      target
+    });
+    putSaved(saved);
+    modal.classList.remove('open');
+    document.getElementById('savedSection').classList.add('open');
+    renderSaved();
+    toast('Setlist saved');
+  });
+
+  function buildSavedItem(item) {
+    const totalSec = item.songs.reduce((a, s) => {
+      const m = parseInt(s.mm||'0',10)||0;
+      const ss = parseInt(s.ss||'0',10)||0;
+      return a + m*60 + ss;
+    }, 0);
+    const mm = Math.floor(totalSec/60), ss = totalSec%60;
+
+    const wrap = el('div', { class: 'saved-item' });
+    const left = el('div');
+    left.appendChild(el('div', { class: 'saved-item-name', text: item.name }));
+    left.appendChild(el('div', {
+      class: 'saved-item-meta',
+      text: item.songs.length + ' song' + (item.songs.length===1?'':'s')
+        + ' · ' + String(mm).padStart(2,'0') + ':' + String(ss).padStart(2,'0')
+        + ' · ' + new Date(item.savedAt).toLocaleDateString()
+    }));
+
+    const right = el('div', { class: 'saved-item-actions' });
+    const loadBtn = el('button', { class: 'mini-btn', text: 'Load' });
+    const delBtn  = el('button', { class: 'mini-btn danger', text: 'Delete' });
+    right.appendChild(loadBtn);
+    right.appendChild(delBtn);
+
+    wrap.appendChild(left);
+    wrap.appendChild(right);
+
+    loadBtn.addEventListener('click', () => {
+      songs = item.songs.map(s => ({ id: uid(), title: s.title||'', mm: s.mm||'', ss: s.ss||'' }));
+      if (songs.length === 0) songs.push(blankSong());
+      target = (typeof item.target === 'number') ? item.target : null;
+      if (target !== null) {
+        const preset = [...presets].find(p => Number(p.dataset.min) === target);
+        if (preset) setTarget(target);
+        else { customInput.value = String(target); setTarget(target, true); }
+      } else {
+        setTarget(null);
+      }
+      renderSongs();
+      recalc();
+      saveState();
+      toast('Loaded "' + item.name + '"');
+    });
+    delBtn.addEventListener('click', () => {
+      if (!confirm('Delete "' + item.name + '"?')) return;
+      const next = getSaved().filter(x => x.id !== item.id);
+      putSaved(next);
+      renderSaved();
+    });
+
+    return wrap;
+  }
+
+  function renderSaved() {
+    const list = document.getElementById('savedList');
+    while (list.firstChild) list.removeChild(list.firstChild);
+    const saved = getSaved();
+    if (!isPro || saved.length === 0) {
+      const empty = el('div', { text: 'No saved setlists yet.' });
+      empty.style.color = 'var(--text-dim)';
+      empty.style.fontSize = '13px';
+      empty.style.padding = '4px 0';
+      list.appendChild(empty);
+      return;
+    }
+    saved.forEach(item => list.appendChild(buildSavedItem(item)));
+  }
+
+  // ---------- Export ----------
+  function buildTextExport(name) {
+    const lines = [];
+    const title = name || 'Setlist';
+    lines.push(title);
+    lines.push('='.repeat(title.length));
+    lines.push('');
+    songs.forEach((s, i) => {
+      const t = formatTimeInputValue(s) || '0:00';
+      const titleStr = s.title || ('(Untitled ' + (i+1) + ')');
+      lines.push(String(i+1).padStart(2,' ') + '. ' + titleStr.padEnd(40, ' ').slice(0,40) + '  ' + t);
+    });
+    lines.push('');
+    const sec = totalSeconds();
+    const mm = Math.floor(sec/60), ss = sec%60;
+    lines.push('Total: ' + String(mm).padStart(2,'0') + ':' + String(ss).padStart(2,'0') + '  (' + Math.round(sec/60) + ' minutes)');
+    if (target !== null) {
+      const diff = sec - target*60;
+      const tag = diff === 0 ? 'on target' : (diff < 0 ? (diffText(-diff) + ' under') : (diffText(diff) + ' over'));
+      lines.push('Target: ' + target + ' min  —  ' + tag);
+    }
+    return lines.join('\n');
+  }
+
+  document.getElementById('exportTxtBtn').addEventListener('click', () => {
+    if (!isPro) { toast('Export requires Pro'); return; }
+    const txt = buildTextExport('Setlist');
+    const blob = new Blob([txt], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'setlist.txt'; a.click();
+    URL.revokeObjectURL(url);
+    toast('Text file exported');
+  });
+
+  document.getElementById('exportPdfBtn').addEventListener('click', () => {
+    if (!isPro) { toast('Export requires Pro'); return; }
+    if (!window.jspdf) { toast('PDF library failed to load'); return; }
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ unit: 'pt', format: 'letter' });
+    const left = 56, top = 64;
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(20);
+    doc.text('Setlist', left, top);
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(11);
+    doc.setTextColor(110);
+    doc.text(new Date().toLocaleDateString(), left, top + 18);
+    doc.setTextColor(20);
+
+    let y = top + 48;
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(12);
+    doc.text('#', left, y);
+    doc.text('Song', left + 28, y);
+    doc.text('Time', 540, y, { align: 'right' });
+    y += 6;
+    doc.setDrawColor(200);
+    doc.line(left, y, 540, y);
+    y += 16;
+
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(11);
+    songs.forEach((s, i) => {
+      if (y > 740) { doc.addPage(); y = 64; }
+      const t = formatTimeInputValue(s) || '0:00';
+      const title = s.title || ('(Untitled ' + (i+1) + ')');
+      doc.text(String(i+1), left, y);
+      doc.text(title.slice(0, 70), left + 28, y);
+      doc.text(t, 540, y, { align: 'right' });
+      y += 18;
+    });
+
+    y += 10;
+    doc.setDrawColor(200);
+    doc.line(left, y, 540, y);
+    y += 22;
+
+    const sec = totalSeconds();
+    const mm = Math.floor(sec/60), ss = sec%60;
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(13);
+    doc.text('Total: ' + String(mm).padStart(2,'0') + ':' + String(ss).padStart(2,'0') + '  (' + Math.round(sec/60) + ' min)', left, y);
+    y += 20;
+
+    if (target !== null) {
+      const diff = sec - target*60;
+      const tag = diff === 0 ? 'on target' : (diff < 0 ? (diffText(-diff) + ' under') : (diffText(diff) + ' over'));
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(11);
+      doc.text('Target: ' + target + ' min  —  ' + tag, left, y);
+    }
+
+    doc.save('setlist.pdf');
+    toast('PDF exported');
+  });
+
+  // ---------- Toast ----------
+  let toastTimer = null;
+  function toast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+  }
+
+  // ---------- Init ----------
+  initTheme();
+  loadState();
+  applyPro();
+  renderSongs();
+  if (target !== null) {
+    const preset = [...presets].find(p => Number(p.dataset.min) === target);
+    if (preset) setTarget(target);
+    else { customInput.value = String(target); setTarget(target, true); }
+  }
+  recalc();
+})();
+</script>
+</body>
+</html>

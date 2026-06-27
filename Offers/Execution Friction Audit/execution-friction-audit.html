@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Execution Friction Audit</title>
+<style>
+  :root {
+    --text: #1a1a1a;
+    --muted: #555;
+    --line: #e5e5e5;
+    --bg: #fafaf7;
+    --accent: #1a1a1a;
+    --accent-hover: #000;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 80px 24px 120px;
+  }
+
+  section {
+    margin-bottom: 64px;
+  }
+
+  h1 {
+    font-size: 40px;
+    line-height: 1.15;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0 0 20px;
+  }
+
+  h2 {
+    font-size: 24px;
+    line-height: 1.25;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 20px;
+  }
+
+  h3 {
+    font-size: 19px;
+    font-weight: 600;
+    margin: 28px 0 12px;
+  }
+
+  .subhead {
+    font-size: 20px;
+    line-height: 1.5;
+    color: var(--muted);
+    margin: 0 0 32px;
+    font-weight: 400;
+  }
+
+  p {
+    margin: 0 0 16px;
+  }
+
+  ul {
+    margin: 0 0 16px;
+    padding-left: 22px;
+  }
+
+  ul li {
+    margin-bottom: 8px;
+  }
+
+  ol {
+    margin: 0 0 16px;
+    padding-left: 22px;
+  }
+
+  ol li {
+    margin-bottom: 14px;
+  }
+
+  strong {
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 56px 0;
+  }
+
+  .cta-wrap {
+    margin: 32px 0;
+  }
+
+  .cta {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    padding: 16px 28px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 17px;
+    letter-spacing: 0.01em;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    will-change: transform;
+  }
+
+  .cta:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  }
+
+  .cta:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+    transition-duration: 0.05s;
+  }
+
+  .cta:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .price-box {
+    text-align: center;
+    padding: 40px 24px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fff;
+  }
+
+  .price-box .price {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+  }
+
+  .price-box .price-detail {
+    color: var(--muted);
+    font-size: 16px;
+    margin: 0 0 24px;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+
+  @media (max-width: 600px) {
+    .container {
+      padding: 56px 20px 96px;
+    }
+    h1 { font-size: 32px; }
+    h2 { font-size: 22px; }
+    .subhead { font-size: 18px; }
+    .two-col {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    hr { margin: 40px 0; }
+    section { margin-bottom: 48px; }
+  }
+
+  .faq-item {
+    margin-bottom: 24px;
+  }
+
+  .faq-q {
+    font-weight: 600;
+    margin: 0 0 6px;
+  }
+
+  .faq-a {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .final-cta {
+    text-align: center;
+    padding: 48px 24px;
+    border-top: 1px solid var(--line);
+    margin-top: 32px;
+  }
+
+  .final-cta p {
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+
+  .not-for-inline {
+    color: var(--muted);
+    font-size: 16px;
+    margin-top: 16px;
+  }
+
+  .not-for-inline strong {
+    color: var(--text);
+    display: block;
+    margin-bottom: 6px;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Headline + Subhead + CTA -->
+  <section>
+    <h1>You Don't Need Discipline. Your System Is Broken.</h1>
+    <p class="subhead">I find exactly where your execution breaks and rebuild a simple system you'll actually use.</p>
+    <div class="cta-wrap">
+      <a href="https://buy.stripe.com/8x200j5lh27Ze4a1fufbq06" class="cta" target="_blank" rel="noopener noreferrer">Start Your Audit</a>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- The Problem -->
+  <section>
+    <h2>The Problem</h2>
+    <p>You're not stuck because you're lazy.</p>
+    <p>You're stuck because:</p>
+    <ul>
+      <li>Starting feels too big</li>
+      <li>Nothing has a clear first step</li>
+      <li>Your tools don't connect</li>
+      <li>You keep resetting instead of progressing</li>
+    </ul>
+    <p>So you think, plan, tweak… and still don't move.</p>
+  </section>
+
+  <hr>
+
+  <!-- What This Is -->
+  <section>
+    <h2>What This Is</h2>
+    <p><strong>Execution Friction Audit — $300</strong></p>
+    <p>A focused diagnostic. I break down how you're actually trying to get things done, identify where it fails, and give you a simple system that makes action easier than avoidance.</p>
+    <p>This is built around identifying real execution breakdowns in how people actually work — not giving generic productivity advice.</p>
+    <p>This can apply to content creation, business follow-through, admin backlog, personal project execution or overloaded digital workflows.</p>
+    <div class="not-for-inline">
+      <strong>What this is not:</strong>
+      <ul>
+        <li>Not coaching or accountability</li>
+        <li>Not mindset or discipline work</li>
+        <li>Not an ongoing program</li>
+        <li>Not a template pack or course</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- What You Get -->
+  <section>
+    <h2>What You Get</h2>
+    <p>Within <strong>48 hours</strong> of your completed intake:</p>
+    <ul>
+      <li><strong>A clear breakdown of where your execution fails</strong> — specific points, not general advice</li>
+      <li><strong>The specific friction points causing you to stall</strong></li>
+      <li><strong>A simplified execution path</strong> — something you can follow immediately</li>
+      <li><strong>A defined starting point</strong> — no guesswork about what to do first</li>
+    </ul>
+    <p>Delivered as a <strong>1–1.5 page audit</strong>. Short enough to actually use.</p>
+  </section>
+
+  <hr>
+
+  <!-- Who This Is For / Not For -->
+  <section>
+    <div class="two-col">
+      <div>
+        <h3>Who This Is For</h3>
+        <ul>
+          <li>You already know what you should be doing</li>
+          <li>You've tried systems, tools, or routines</li>
+          <li>You still aren't executing consistently</li>
+          <li>You're tired of restarting</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Who This Is Not For</h3>
+        <ul>
+          <li>You want motivation or accountability</li>
+          <li>You're looking for ongoing coaching</li>
+          <li>You haven't started anything yet — you need something to audit</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- How It Works -->
+  <section>
+    <h2>How It Works</h2>
+    <ol>
+      <li><strong>Book and pay.</strong> $300 flat.</li>
+      <li><strong>Answer a short intake.</strong> 5 questions about what you're trying to do and where it's breaking down.</li>
+      <li><strong>Receive your audit within 48 hours.</strong> A 1–1.5 page document: friction points, execution path, starting point.</li>
+    </ol>
+    <p>That's the whole thing. No calls. No check-ins.</p>
+  </section>
+
+  <hr>
+
+  <!-- Pricing -->
+  <section>
+    <div class="price-box">
+      <p class="price">$300</p>
+      <p class="price-detail">Flat, one-time. No tiers. No subscription. No upsell.</p>
+      <a href="https://buy.stripe.com/8x200j5lh27Ze4a1fufbq06" class="cta" target="_blank" rel="noopener noreferrer">Start Your Audit</a>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- FAQ -->
+  <section>
+    <h2>FAQ</h2>
+
+    <div class="faq-item">
+      <p class="faq-q">Is this coaching?</p>
+      <p class="faq-a">No. This is a diagnostic and system redesign. I don't work on you — I work on how your work is structured.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">How is this different from productivity advice I've already seen?</p>
+      <p class="faq-a">Generic advice is built for an idealized person. The audit is built around your actual workflow and your actual breakdown points. You're not getting a system to adopt — you're getting yours rebuilt.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">What if I don't follow through after?</p>
+      <p class="faq-a">That's what this is designed to address — by reducing friction and making the starting point usable.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">What if I've tried systems before and abandoned them?</p>
+      <p class="faq-a">Good. That's data. The audit uses what didn't stick to figure out what will.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">Is a short intake really enough?</p>
+      <p class="faq-a">Yes — because this is not therapy, coaching, or a personality assessment. The intake is designed to surface specific execution breakdowns, not collect your whole backstory.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">What do you need from me?</p>
+      <p class="faq-a">Clear answers about what you're trying to do and what's been happening. 5 questions, completed honestly. That's it.</p>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="final-cta">
+    <p>One-time audit. $300. Delivered in 48 hours. No calls.</p>
+    <a href="https://buy.stripe.com/8x200j5lh27Ze4a1fufbq06" class="cta" target="_blank" rel="noopener noreferrer">Start Your Audit</a>
+  </section>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+- generic [ref=e10]:
+  - generic [ref=e54]: SECTION 3 OF 13 · KEY RELATIONSHIPS
+  - heading "Key relationships" [level=2] [ref=e55]
+  - paragraph [ref=e56]: List the people connected to this person.
+  - generic [ref=e57]:
+    - generic [ref=e58]: Parents
+    - textbox [ref=e59]
+  - generic [ref=e60]:
+    - generic [ref=e61]: Spouse or spouses
+    - textbox [ref=e62]
+  - generic [ref=e63]:
+    - generic [ref=e64]: Children
+    - textbox [ref=e65]
+  - generic [ref=e66]:
+    - generic [ref=e67]: Siblings
+    - textbox [ref=e68]
+  - generic [ref=e69]:
+    - generic [ref=e70]: Other important relatives
+    - textbox [ref=e71]
+  - generic [ref=e72]:
+    - generic [ref=e73]: Friends, neighbors, mentors, employers or community ties
+    - textbox [ref=e74]
+  - generic [ref=e75]:
+    - button "← back" [ref=e76] [cursor=pointer]
+    - generic [ref=e77]:
+      - button "skip" [ref=e78] [cursor=pointer]
+      - button "next →" [ref=e79] [cursor=pointer]

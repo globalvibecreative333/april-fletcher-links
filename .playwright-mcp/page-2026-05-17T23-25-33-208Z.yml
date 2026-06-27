@@ -1,0 +1,17 @@
+- generic [ref=e10]:
+  - generic [ref=e341]: SECTION 13 OF 13 · FAMILY INTERVIEW LEADS
+  - heading "Family interview leads" [level=2] [ref=e342]
+  - paragraph [ref=e343]: Are there living relatives who may remember this person or stories about them?
+  - generic [ref=e344]:
+    - generic [ref=e345]: Living relatives who might remember?
+    - generic [ref=e346]:
+      - radio "yes" [ref=e347]
+      - text: "yes"
+    - generic [ref=e348]:
+      - radio "no" [ref=e349]
+      - text: "no"
+  - generic [ref=e350]:
+    - button "← back" [ref=e351] [cursor=pointer]
+    - generic [ref=e352]:
+      - button "skip" [ref=e353] [cursor=pointer]
+      - button "see the profile →" [ref=e354] [cursor=pointer]

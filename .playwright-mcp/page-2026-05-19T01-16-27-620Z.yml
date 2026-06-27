@@ -1,0 +1,56 @@
+- generic [ref=e10]:
+  - generic [ref=e273]: SECTION 10 OF 13 · POSSIBLE STORY ANGLES
+  - heading "Possible story angles" [level=2] [ref=e274]
+  - paragraph [ref=e275]: Not the full biography yet — possible ways in. Pick one to three.
+  - generic [ref=e276]:
+    - generic [ref=e277]: Story angle options
+    - generic [ref=e278]:
+      - checkbox "A life shaped by migration" [ref=e279]
+      - text: A life shaped by migration
+    - generic [ref=e280]:
+      - checkbox "A life shaped by work" [ref=e281]
+      - text: A life shaped by work
+    - generic [ref=e282]:
+      - checkbox "A life shaped by family responsibility" [ref=e283]
+      - text: A life shaped by family responsibility
+    - generic [ref=e284]:
+      - checkbox "A life shaped by loss" [ref=e285]
+      - text: A life shaped by loss
+    - generic [ref=e286]:
+      - checkbox "A life shaped by a specific place" [ref=e287]
+      - text: A life shaped by a specific place
+    - generic [ref=e288]:
+      - checkbox "A life shaped by faith or community" [ref=e289]
+      - text: A life shaped by faith or community
+    - generic [ref=e290]:
+      - checkbox "A life shaped by survival" [ref=e291]
+      - text: A life shaped by survival
+    - generic [ref=e292]:
+      - checkbox "A life shaped by reinvention" [ref=e293]
+      - text: A life shaped by reinvention
+    - generic [ref=e294]:
+      - checkbox "A life shaped by a hidden or unanswered question" [ref=e295]
+      - text: A life shaped by a hidden or unanswered question
+    - generic [ref=e296]:
+      - checkbox "A life mostly known through fragments" [ref=e297]
+      - text: A life mostly known through fragments
+    - generic [ref=e298]:
+      - checkbox "A life that reveals something about the wider family" [ref=e299]
+      - text: A life that reveals something about the wider family
+    - generic [ref=e300]:
+      - checkbox "A life that shows how history touched ordinary people" [ref=e301]
+      - text: A life that shows how history touched ordinary people
+  - generic [ref=e302]:
+    - generic [ref=e303]: My strongest story angle is
+    - textbox [ref=e304]
+  - generic [ref=e305]:
+    - generic [ref=e306]: Why this angle fits
+    - textbox [ref=e307]
+  - generic [ref=e308]:
+    - generic [ref=e309]: A second possible angle is
+    - textbox [ref=e310]
+  - generic [ref=e311]:
+    - button "← back" [ref=e312] [cursor=pointer]
+    - generic [ref=e313]:
+      - button "skip" [ref=e314] [cursor=pointer]
+      - button "next →" [ref=e315] [cursor=pointer]
